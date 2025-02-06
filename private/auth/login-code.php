@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (password_verify($password, $hashedPassword)) {
             // Successful login
             $_SESSION['user_id'] = $userId;
+ 
 
             // If "Remember Me" is checked, create a persistent cookie
             if ($rememberMe) {

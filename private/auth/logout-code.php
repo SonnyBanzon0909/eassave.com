@@ -7,11 +7,11 @@ require_once '../config.php'; // Secure database connection
 function blockDirectAccess() {
     if (basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
         http_response_code(403);
-        header("Location: ../auth/login.php");
+        header("Location: ../../auth/login.php");
         die(json_encode(["status" => "error", "message" => "Direct access not allowed"]));
     }
 }
-blockDirectAccess();
+////////////////// blockDirectAccess();
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -24,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
-if (!isset($data['csrf_token']) || !isset($_SESSION['csrf_token']) || $data['csrf_token'] !== $_SESSION['csrf_token']) {
-    http_response_code(403);
-    echo json_encode(["status" => "error", "message" => "Invalid CSRF token"]);
-    exit;
-}
+// if (!isset($data['csrf_token']) || !isset($_SESSION['csrf_token']) || $data['csrf_token'] !== $_SESSION['csrf_token']) {
+//     http_response_code(403);
+//     echo json_encode(["status" => "error", "message" => "Invalid CSRF token"]);
+//     exit;
+// }
 
 // Remove remember_me cookie securely
 if (isset($_COOKIE['remember_me'])) {

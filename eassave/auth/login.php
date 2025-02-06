@@ -15,9 +15,15 @@ if (empty($_SESSION['csrf_token'])) {
 // Check if user is remembered
 include '../../private/login-session.php';  
 
-
+// Redirect to /login if the user is not logged in
+if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
+    $_SESSION['is_login']= false;
+     
+}
 
 ?>
+
+
 
 
 

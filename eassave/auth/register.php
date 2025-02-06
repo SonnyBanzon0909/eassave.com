@@ -1,14 +1,25 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
 
-// Start the session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Generate a CSRF token if it doesn't exist
 if (empty($_SESSION['csrf_token'])) {
   $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+
+// Redirect to /login if the user is not logged in
+if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
+    // header("Location: /auth/login.php");
+    //exit();
+}
+
+
 ?>
+
+
 
 
 
@@ -103,7 +114,7 @@ if (empty($_SESSION['csrf_token'])) {
         <div id="w-node-_6781a2ad-69e0-0135-a3da-b0405a444611-ae446d52" class="auth-form-block w-form">
 
 
-         <form id="wf-form-Login-Form" name="wf-form-Login-Form" data-name="Login Form" method="post" action="../../private/auth/register-code.php" data-wf-page-id="665f147b743ba95cae446d52" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
+         <form id="wf-form-Login-Form" name="wf-form-Login-Form" data-name="Login Form" method="post" action="../private/auth/register-code.php" data-wf-page-id="665f147b743ba95cae446d52" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
 
           <h1 class="heading-style-h5 bot-33">Create an Account</h1>
           <div class="login-grid">
@@ -254,7 +265,7 @@ document.querySelectorAll('.otp-field').forEach(input => {
 
     const formData = new FormData(this);
 
-    const response = await fetch("../../private/auth/register-code.php", {
+    const response = await fetch("../private/auth/register-code.php", {
       method: "POST",
       body: formData
     });
