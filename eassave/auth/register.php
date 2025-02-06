@@ -49,13 +49,13 @@ if (empty($_SESSION['csrf_token'])) {
       <div class="global-styles w-embed">
 
 <!-- Global CSS -->
-<?php include $root. '/eassave/partials/global-css.css'; ?>
+<?php include '../partials/global-css.css'; ?>
 
 </div>
 
 
 <!-- Navigation -->
-<?php include $root. '/eassave/partials/navigation-dark.html'; ?>
+<?php include '../partials/navigation-dark.html'; ?>
 
 <!-- OTP wrapper -->
 
@@ -209,7 +209,7 @@ if (empty($_SESSION['csrf_token'])) {
 
 
 <!-- Footer section -->
-<?php include $root. '/eassave/partials/footer-dark.html'; ?>
+<?php include '../partials/footer-dark.html'; ?>
 
 </div>
 </div>

@@ -61,13 +61,13 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
     <div class="global-styles w-embed">
    
    <!-- Navigation -->
-  <?php include $root. '/eassave/partials/global-css.css'; ?>
+  <?php include 'partials/global-css.css'; ?>
 
 </div>
 <main class="main-wrapper">
 
   <!-- Navigation -->
-  <?php include $root. '/eassave/partials/navigation-light.html'; ?>
+  <?php include 'partials/navigation-light.html'; ?>
 
   <section class="section-hero">
     <div data-delay="4000" data-animation="cross" class="slider w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="1000" data-infinite="true">
@@ -429,7 +429,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 </section>
 
 <!-- Footer section -->
-<?php include $root. '/eassave/partials/footer-light.html'; ?>
+<?php include 'partials/footer-light.html'; ?>
 
 
 

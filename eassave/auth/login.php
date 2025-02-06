@@ -13,7 +13,7 @@ if (empty($_SESSION['csrf_token'])) {
 }
 
 // Check if user is remembered
-include $root. '/private/login-session.php';  
+include '../../private/login-session.php';  
 
 
 
@@ -60,12 +60,12 @@ include $root. '/private/login-session.php';
           }
         </style>
         <!-- Global CSS -->
-        <?php include $root. '/eassave/partials/global-css.css'; ?>
+        <?php include '../partials/global-css.css'; ?>
 
       </div>
 
       <!-- Navigation -->
-      <?php include $root. '/eassave/partials/navigation-dark.html'; ?>
+      <?php include '../partials/navigation-dark.html'; ?>
 
 
       <section id="contact-form" class="section-auth">
@@ -73,7 +73,7 @@ include $root. '/private/login-session.php';
           <div class="container-large">
             <div class="auth-wrapper">
               <div id="w-node-_6781a2ad-69e0-0135-a3da-b0405a444611-ae446d51" class="auth-form-block w-form">
-                <form id="wf-form-Login-Form" name="wf-form-Login-Form" data-name="Login Form" action="../../private/auth/login-code.php" method="POST" data-wf-page-id="665f147b743ba95cae446d51" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
+                <form id="wf-form-Login-Form" name="wf-form-Login-Form" data-name="Login Form" action="../private/auth/login-code.php" method="POST" data-wf-page-id="665f147b743ba95cae446d51" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
                   <h1 class="heading-style-h5">Welcome Back 👋</h1>
                   <div class="form-excerpt">Please login using the account details bellow.</div>
                   <div class="login-grid">
@@ -140,7 +140,7 @@ include $root. '/private/login-session.php';
 
 
     <!-- Footer section -->
-    <?php include $root. '/eassave/partials/footer-dark.html'; ?>
+    <?php include '../partials/footer-dark.html'; ?>
 
   </div>
 </div>
@@ -171,7 +171,7 @@ include $root. '/private/login-session.php';
   const formData = new FormData(this);
 
   // Make the fetch request
-  const response = await fetch("../../private/auth/login-code.php", {
+  const response = await fetch("../private/auth/login-code.php", {
     method: "POST",  // Make sure it's POST, not GET
     body: formData
   });
