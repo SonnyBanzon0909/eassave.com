@@ -1,21 +1,13 @@
 <?php
-$root = $_SERVER['DOCUMENT_ROOT'];
-
-
-
 session_start();
-require_once '../config.php'; // Secure database connection
-
-
 $root = $_SERVER['DOCUMENT_ROOT'];
- 
+require_once '../config.php'; // Secure database connection
 
 // Function to prevent direct access
 function blockDirectAccess() {
     if (basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
         http_response_code(403);
-          header("Location: " . $root . "/eassave/auth/login.php");
-
+        header("Location: ../auth/login.php");
         die(json_encode(["status" => "error", "message" => "Direct access not allowed"]));
     }
 }
@@ -25,6 +17,16 @@ blockDirectAccess();
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(403);
     echo json_encode(["status" => "error", "message" => "Unauthorized request"]);
+    exit;
+}
+
+// Validate CSRF Token
+$json = file_get_contents("php://input");
+$data = json_decode($json, true);
+
+if (!isset($data['csrf_token']) || !isset($_SESSION['csrf_token']) || $data['csrf_token'] !== $_SESSION['csrf_token']) {
+    http_response_code(403);
+    echo json_encode(["status" => "error", "message" => "Invalid CSRF token"]);
     exit;
 }
 
@@ -52,6 +54,7 @@ $_SESSION = [];
 session_unset();
 session_destroy();
 
+// Return JSON response
 echo json_encode(["status" => "success", "message" => "Logged out successfully"]);
 exit;
 ?>

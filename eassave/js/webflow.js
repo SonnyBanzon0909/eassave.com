@@ -1,3 +1,33 @@
+ 
+ 
+document.getElementById("logout").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+
+    fetch("../private/auth/logout-code.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Logged out successfully!");
+            window.location.href = "../../auth/login.php"; // Redirect to login page
+        } else {
+            alert("Logout failed: " + data.message);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+ 
+
+ 
+
+
+
+
 
 /*!
  * Webflow: Front-end site library
