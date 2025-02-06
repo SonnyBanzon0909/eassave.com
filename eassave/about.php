@@ -1,5 +1,33 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+// Using absolute path to call the configuration file
+require_once '../private/config.php';  // Goes one folder above and accesses the 'private' folder
+
+// Example: Database connection
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+// Check if user is remembered
+include '../private/login-session.php';  
+
+// Redirect to /login if the user is not logged in
+if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
+    header("Location: .../../auth/login.php");
+    exit();
+}
+
+
 ?>
 
 <!DOCTYPE html><!--  Last Published: Fri Oct 11 2024 08:14:06 GMT+0000 (Coordinated Universal Time)  -->
@@ -29,349 +57,16 @@ $root = $_SERVER['DOCUMENT_ROOT'];
   <div class="page-wrapper">
     <div class="main-wrapper">
       <div class="global-styles w-embed">
-        <style>
-/* Make text look crisper and more legible in all browsers */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-/* Focus state style for keyboard navigation for the focusable elements */
-*[tabindex]:focus-visible,
-input[type="file"]:focus-visible {
-   outline: 0.125rem solid #4d65ff;
-   outline-offset: 0.125rem;
-}
-/* Get rid of top margin on first element in any rich text element */
-.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
-  margin-top: 0 !important;
-}
-/* Get rid of bottom margin on last element in any rich text element */
-.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
-    margin-bottom: 0 !important;
-}
-/* Prevent all click and hover interaction with an element */
-.pointer-events-off {
-    pointer-events: none;
-}
-/* Enables all click and hover interaction with an element */
-.pointer-events-on {
-  pointer-events: auto;
-}
-/* Create a class of .div-square which maintains a 1:1 dimension of a div */
-.div-square::after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-}
-/* Make sure containers never lose their center alignment */
-.container-medium,.container-small, .container-large {
-    margin-right: auto !important;
-    margin-left: auto !important;
-}
-/* 
-Make the following elements inherit typography styles from the parent and not have hardcoded values. 
-Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
-Uncomment this CSS to use it in the project. Leave this message for future hand-off.
-*/
-/*
-a,
-.w-input,
-.w-select,
-.w-tab-link,
-.w-nav-link,
-.w-dropdown-btn,
-.w-dropdown-toggle,
-.w-dropdown-link {
-  color: inherit;
-  text-decoration: inherit;
-  font-size: inherit;
-}
-*/
-/* Apply "..." after 3 lines of text */
-.text-style-3lines {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-/* Apply "..." after 2 lines of text */
-.text-style-2lines {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-/* Adds inline flex display */
-.display-inlineflex {
-  display: inline-flex;
-}
-/* These classes are never overwritten */
-.hide {
-  display: none !important;
-}
-.margin-0 {
-  margin: 0rem !important;
-}
-.padding-0 {
-  padding: 0rem !important;
-}
-.spacing-clean {
-    padding: 0rem !important;
-    margin: 0rem !important;
-}
-.margin-top {
-  margin-right: 0rem !important;
-  margin-bottom: 0rem !important;
-  margin-left: 0rem !important;
-}
-.padding-top {
-  padding-right: 0rem !important;
-  padding-bottom: 0rem !important;
-  padding-left: 0rem !important;
-}
-.margin-right {
-  margin-top: 0rem !important;
-  margin-bottom: 0rem !important;
-  margin-left: 0rem !important;
-}
-.padding-right {
-  padding-top: 0rem !important;
-  padding-bottom: 0rem !important;
-  padding-left: 0rem !important;
-}
-.margin-bottom {
-  margin-top: 0rem !important;
-  margin-right: 0rem !important;
-  margin-left: 0rem !important;
-}
-.padding-bottom {
-  padding-top: 0rem !important;
-  padding-right: 0rem !important;
-  padding-left: 0rem !important;
-}
-.margin-left {
-  margin-top: 0rem !important;
-  margin-right: 0rem !important;
-  margin-bottom: 0rem !important;
-}
-.padding-left {
-  padding-top: 0rem !important;
-  padding-right: 0rem !important;
-  padding-bottom: 0rem !important;
-}
-.margin-horizontal {
-  margin-top: 0rem !important;
-  margin-bottom: 0rem !important;
-}
-.padding-horizontal {
-  padding-top: 0rem !important;
-  padding-bottom: 0rem !important;
-}
-.margin-vertical {
-  margin-right: 0rem !important;
-  margin-left: 0rem !important;
-}
-.padding-vertical {
-  padding-right: 0rem !important;
-  padding-left: 0rem !important;
-}
-.why-list.owl-carousel .owl-stage-outer
-{
-    overflow: visible;
-}
-.why-list.owl-carousel .owl-stage
-{
-    padding-left: 0;
-}
-.partners-list .owl-item img
-{
-    width: auto !important;
-}
-.partners-list.owl-carousel .owl-stage-outer, .testimonial-list.owl-carousel .owl-stage-outer, .about-gallery-list.owl-carousel .owl-stage-outer
-{
-    overflow: visible !important;
-}
-a
-{
-    color: #0A4DF6;
-}
-.select, .select-field {
-    appearance: none; /* Removes default arrow icon in some browsers */
-    -webkit-appearance: none; /* Removes default arrow icon in Safari */
-    -moz-appearance: none; /* Removes default arrow icon in Firefox */
-}
-.w-slide [aria-hidden="true"] {
- height: 0px !important;
-}
-.dots-container .w-slider-dot 
-{
-  width: 25%;
-  height: 2px;
-  background-color: #717171;
-  border-radius: 0px !important;
-  padding:0 !important;
-  margin: 0 !important;
-}
-.dots-container .w-slider-dot.w-active
-{
-  background-color: #0629A3;
-}
-.dots-container .w-slider-dot:hover
-{
-  background-color: #0629A3;
-}
-.sidenav-button:hover .icon
-{
-    color: white;
-}
-.sidenav-button.w--current .icon
-{
-    color: white;
-}
-.recent-list .owl-stage
-{
-    padding-left: 0 !important;
-}
-.label span
-{
-    color: #EB5757;
-}   
-.active-swiper {
-  /* Make sure the container has enough height and width */
-  height: 100%;
-  width: 100%;
-}
-.swiper-slide {
-  /* Adjust styles for each slide as needed */
-  width: auto; /* or a specific width */
-}
-.tabs span
-{
-    font-size: 12px;
-    color: #D0222D;
-}
-/*For File Upload*/
-.file-upload {
-    display: flex;
-    align-items: center;
-    min-height: 34px;
-    color: #fff;
-}
-.file-upload.disabled
-{   
-    color: #828282;
-}
-.file-upload input[type="file"] {
-    display: none; /* Hide the default file input */
-}
-.file-upload label {
-    background-color: #5028FF;
-    padding: 8px 24px;
-    cursor: pointer;
-    border-radius: 50px;
-    margin: 0;
-}
-.file-upload.disabled label 
-{
-    background-color: #CACACA;
-}
-.file-name {
-    margin: 0 8px;
-    font-size: 14px;
-    font-weight: 400;
-    color: #171717;
-}
-.remove-file {
-    cursor: pointer;
-    background-image: url('https://uploads-ssl.webflow.com/665f147b743ba95cae446cfe/66a51772340eb291308ac0da_close_24px.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 24px;
-    height: 24px;
-    display: none;
-}
-.scolling-wrapper::-webkit-scrollbar {
-  width: 0px;
-}
-.color
-{
-	margin: 0 14px;
-  width: 50px;
-  height: 50px;
-  padding: 1px 0px;
-  border: 1px solid #BDBDBD;
-  border-radius: 3px;
-  padding-block: 0px;
-  padding-inline: 0px;
-}
-.color-text-field
-{
-   border: solid 1px #BDBDBD;
-}
-.label-text
-{
-	min-width: 100px;
-}
-.color
-{
-	flex: none;
-  cursor: pointer;
-}
-.radio-button-field .layout-radio.w--redirected-checked ~ .radio-phone-template {
-    border: solid 3px #19A733;
-}
-.radio-button-field .layout-radio.w--redirected-checked + .radio-phone-template {
-    border: solid 3px #19A733;
-}
-.radio-button-field.w--redirected-checked .radio-phone-template {
-    border: solid 3px #19A733;
-}
-@media screen and (max-width: 991px) {
-    .hide, .hide-tablet {
-        display: none !important;
-    }
-}
-@media screen and (max-width: 767px) {
-    .hide-mobile-landscape{
-      display: none !important;
-  }
-}
-@media screen and (max-width: 479px) {
-    .hide-mobile{
-      display: none !important;
-  }
-  .label-text
-  {
-    min-width: 95px;
-    font-size: 12px;
-}
-.color
-{
- margin: 0 4px !important;
-}
-.color-field
-{
- max-width: 55%;
-}
-}
-/* Remove the spinner arrows for Chrome, Safari, Edge */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-</style>
-</div>
+         <!-- Navigation -->
+         <?php include 'partials/global-css.css'; ?>
+     </div>
 
-<!-- Navigation -->
-<?php include 'partials/navigation-dark.html'; ?>
+     <!-- Navigation -->
+     <?php include 'partials/navigation-dark.html'; ?>
 
 
-</div>
-<section class="section-header">
+ </div>
+ <section class="section-header">
     <div class="padding-global">
       <div class="container-large">
         <div class="header-moving-wrapper absolute-header">
@@ -623,23 +318,23 @@ input[type="number"]::-webkit-outer-spin-button {
 <script>
     var slider = $('.about-gallery-list');
     slider.on('initialized.owl.carousel changed.owl.carousel', function(event) {
-     if (!event.namespace)  {
-       return;
-   }
-}).owlCarousel({
-	items: 1,
-  nav: false,
-  dots: false,
-  loop: true,
-  autoHeight: false,
-  autoplay: true,
-  autoplayTimeout: 6000,
-  smartSpeed: 1000,
-  fluidSpeed: 1000,
-  autoplaySpeed: 1000,
-  navSpeed: 1000,
-  transitionStyle: 'linear',
-  responsive : {
+       if (!event.namespace)  {
+         return;
+     }
+ }).owlCarousel({
+   items: 1,
+   nav: false,
+   dots: false,
+   loop: true,
+   autoHeight: false,
+   autoplay: true,
+   autoplayTimeout: 6000,
+   smartSpeed: 1000,
+   fluidSpeed: 1000,
+   autoplaySpeed: 1000,
+   navSpeed: 1000,
+   transitionStyle: 'linear',
+   responsive : {
   	// breakpoint from 0 up
     0 : {
       items:1,
@@ -648,22 +343,22 @@ input[type="number"]::-webkit-outer-spin-button {
   },
     // breakpoint from 480 up
   480 : {
-   items:1,
-   margin:15,
-   stagePadding: 30,
-},
+     items:1,
+     margin:15,
+     stagePadding: 30,
+ },
     // breakpoint from 768 up
-768 : {
-   items:2,
-   margin:20,
-   stagePadding: 50,
-},
+ 768 : {
+     items:2,
+     margin:20,
+     stagePadding: 50,
+ },
     // breakpoint from 1000 up
-1000 : {
-   items:2,
-   margin:30,
-   stagePadding: 75,
-}
+ 1000 : {
+     items:2,
+     margin:30,
+     stagePadding: 75,
+ }
 }          
 });
 </script>
