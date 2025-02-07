@@ -524,7 +524,7 @@ input[type="number"]::-webkit-outer-spin-button {
 </div>
 </div>
 </section>
-<section class="section-custom">
+<section class="section-custom" >
     <div class="padding-global">
       <div class="container-large">
         <div class="custom-cotent-wrapper">
@@ -534,7 +534,7 @@ input[type="number"]::-webkit-outer-spin-button {
   </div>
 </div>
 </section>
-<section class="section-cta">
+<section class="section-cta" style="padding-top: 60px;">
     <div class="padding-global">
       <div class="container-large">
         <div class="cta-wrapper">
