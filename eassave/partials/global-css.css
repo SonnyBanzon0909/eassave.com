@@ -418,4 +418,9 @@ input[type="number"]::-webkit-outer-spin-button {
 {
   overflow: hidden;
 }
+
+.testimonial-content-con
+{
+  min-height: 400px;
+}
 </style>
