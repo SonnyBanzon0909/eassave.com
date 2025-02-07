@@ -23,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 
- 
+
 
 // Redirect to /login if the user is not logged in
 if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
@@ -77,53 +77,53 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       <div data-delay="4000" data-animation="cross" class="slider w-slider" data-autoplay="true" data-easing="ease" data-hide-arrows="true" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="1000" data-infinite="true">
         <div class="w-slider-mask">
 
-<!----------------------------------->
+          <!----------------------------------->
 
-<?php
+          <?php
 // Select query for hero_slider table
-$select_query = "SELECT id, title, short_description, link, image, bg_image FROM hero_slider";
-$result = $conn->query($select_query);
+          $select_query = "SELECT id, title, short_description, link, image, bg_image FROM hero_slider";
+          $result = $conn->query($select_query);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo '<div class="slide w-slide">';
-        echo '  <div class="slider-wrapper">';
-        echo '    <div class="padding-global">';
-        echo '      <div class="container-large">';
-        echo '        <div class="hero-wrapper">';
-        echo '          <div class="text-container">';
-        echo '            <h1 class="heading-style-h2 hero-title">' . htmlspecialchars($row['title']) . '</h1>';
-        echo '          </div>';
-        echo '          <div class="text-container">';
-        echo '            <div class="hero-excerpt">' . htmlspecialchars($row['short_description']) . '</div>';
-        echo '          </div>';
-        echo '          <a href="' . htmlspecialchars($row['link']) . '" class="button is-icon w-inline-block">';
-        echo '            <div class="btn-text">Learn more on our FAQ</div>';
-        echo '          </a>';
-        echo '        </div>';
-        echo '      </div>';
-        echo '    </div>';
-        echo '    <div class="hero-img-wrapper">';
-        echo '      <div class="bg-wrapper">';
-        echo '        <img src="' . htmlspecialchars($row['bg_image']) . '" class="hero-bg" alt="Background Image">';
-        echo '      </div>';
-        echo '      <img src="' . htmlspecialchars($row['image']) . '" class="hero-img" alt="' . htmlspecialchars($row['title']) . '">';
-        echo '    </div>';
-        echo '  </div>';
-        echo '</div>';
-    }
-} else {
-    echo "No slides found.";
-}
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              echo '<div class="slide w-slide">';
+              echo '  <div class="slider-wrapper">';
+              echo '    <div class="padding-global">';
+              echo '      <div class="container-large">';
+              echo '        <div class="hero-wrapper">';
+              echo '          <div class="text-container">';
+              echo '            <h1 class="heading-style-h2 hero-title">' . htmlspecialchars($row['title']) . '</h1>';
+              echo '          </div>';
+              echo '          <div class="text-container">';
+              echo '            <div class="hero-excerpt">' . htmlspecialchars($row['short_description']) . '</div>';
+              echo '          </div>';
+              echo '          <a href="' . htmlspecialchars($row['link']) . '" class="button is-icon w-inline-block">';
+              echo '            <div class="btn-text">Learn more on our FAQ</div>';
+              echo '          </a>';
+              echo '        </div>';
+              echo '      </div>';
+              echo '    </div>';
+              echo '    <div class="hero-img-wrapper">';
+              echo '      <div class="bg-wrapper">';
+              echo '        <img src="' . htmlspecialchars($row['bg_image']) . '" class="hero-bg" alt="Background Image">';
+              echo '      </div>';
+              echo '      <img src="' . htmlspecialchars($row['image']) . '" class="hero-img" alt="' . htmlspecialchars($row['title']) . '">';
+              echo '    </div>';
+              echo '  </div>';
+              echo '</div>';
+            }
+          } else {
+            echo "No slides found.";
+          }
 
- 
-?>
+
+          ?>
 
 
           
- 
 
-<!----------------------------------->
+
+          <!----------------------------------->
 
         </div>
         <div class="hide w-slider-arrow-left">
@@ -135,53 +135,59 @@ if ($result->num_rows > 0) {
         <div class="dots-container w-slider-nav w-slider-nav-invert w-round"></div>
       </div>
     </section>
+
     <section class="section-why-us">
       <div class="padding-global">
         <div class="container-large">
           <div class="why-us-wrapper">
             <h2 class="heading-style-h1">Why us? Here’s why…</h2>
+            
+
             <div class="why-lis-wrapper">
               <div class="why-list owl-carousel owl-theme">
-                <div class="why-card">
-                  <div class="why-content-wrapper">
-                    <div class="heading-style-h5 overline bot-34">01</div>
-                    <h3 class="heading-style-h4 why-card-title">Never miss an opportunity to grow your network</h3>
-                    <div>Connect wherever you go. Your Eassave digital business card can be easily shared with anyone you meet even if they don’t have the app.</div>
-                  </div>
-                </div>
-                <div class="why-card">
-                  <div class="why-content-wrapper">
-                    <div class="heading-style-h5 overline bot-34">02</div>
-                    <h3 class="heading-style-h4 why-card-title">Make a great first impression</h3>
-                    <div>Stand out with a digital business card. Eassave is COVID-safe, secure, environmentally friendly and a real talking point with customers.</div>
-                  </div>
-                </div>
-                <div class="why-card">
-                  <div class="why-content-wrapper">
-                    <div class="heading-style-h5 overline bot-34">03</div>
-                    <h3 class="heading-style-h4 why-card-title">Be memorable</h3>
-                    <div>When you receive a digital business card, Eassave automatically logs when and where you met your new contact. You can also add notes to your cards to record key customer details.</div>
-                  </div>
-                </div>
-                <div class="why-card">
-                  <div class="why-content-wrapper">
-                    <div class="heading-style-h5 overline bot-34">04</div>
-                    <h3 class="heading-style-h4 why-card-title">Eco-Friendly</h3>
-                    <div>orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-                  </div>
-                </div>
-                <div class="why-card">
-                  <div class="why-content-wrapper">
-                    <div class="heading-style-h5 overline bot-34">05</div>
-                    <h3 class="heading-style-h4 why-card-title">Affordable</h3>
-                    <div>orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-                  </div>
-                </div>
+
+
+                <!-- ---------------- -->
+
+                <?php
+// Select query for why_us table
+                $select_query = "SELECT id, count, title, short_description FROM why_us ORDER BY id ASC";
+                $result = $conn->query($select_query);
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    echo '<div class="why-card">';
+                    echo '  <div class="why-content-wrapper">';
+                    echo '    <div class="heading-style-h5 overline bot-34">' . htmlspecialchars($row['count']) . '</div>';
+                    echo '    <h3 class="heading-style-h4 why-card-title">' . htmlspecialchars($row['title']) . '</h3>';
+                    echo '    <div>' . htmlspecialchars($row['short_description']) . '</div>';
+                    echo '  </div>';
+                    echo '</div>';
+                  }
+                } else {
+                  echo "No records found.";
+                }
+
+
+
+                ?>
+
+
+                <!-- ---------------- -->
+
+
+
+
+
               </div>
             </div>
+
+
           </div>
         </div>
       </div>
+
+
       <div data-w-id="e77d7a3d-49b4-6bd3-5deb-4da4d0bfbf0c" class="smart-swrapper"><img src="images/Card-mockup-1.svg" loading="lazy" style="-webkit-transform:translate3d(-120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt="" class="smart-card-1"><img src="images/Card-mockup.svg" loading="lazy" style="-webkit-transform:translate3d(120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(120%, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt="" class="smart-card-2">
         <div class="padding-global">
           <div class="container-large">
@@ -229,13 +235,34 @@ if ($result->num_rows > 0) {
           <div class="heading-style-h6 text-align-center">Teams at these industry-leading companies love using our digital business cards</div>
           <div class="partners-list-wrapper">
             <div class="partners-list owl-carousel owl-theme">
-              <div class="partners-item"><img src="images/logoipsum-241_1logoipsum-241.png" loading="eager" alt="" class="partners-img"></div>
-              <div class="partners-item"><img src="images/logoipsum-242.png" loading="eager" alt="" class="partners-img"></div>
-              <div class="partners-item"><img src="images/logoipsum-212.png" loading="eager" alt="" class="partners-img"></div>
-              <div class="partners-item"><img src="images/logoipsum-256_1logoipsum-256.png" loading="eager" alt="" class="partners-img"></div>
-              <div class="partners-item"><img src="images/logoipsum-288.png" loading="eager" alt="" class="partners-img"></div>
-              <div class="partners-item"><img src="images/logoipsum-290_1logoipsum-290.png" loading="eager" alt="" class="partners-img"></div>
-              <div class="partners-item"><img src="images/logoipsum-297.png" loading="eager" alt="" class="partners-img"></div>
+
+              <!-- -------------- -->
+
+              <?php
+              // Select query for partners table
+              $select_query = "SELECT id, name, logo, link, created_at, updated_at FROM partners ORDER BY id ASC";
+              $result = $conn->query($select_query);
+
+              if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                  echo '<div class="partners-item">';
+                  echo '  <img src="' . htmlspecialchars($row['logo']) . '" loading="eager" alt="' . htmlspecialchars($row['name']) . '" class="partners-img">';
+                  echo '</div>';
+                }
+              } else {
+                echo "No partners found.";
+              }
+
+
+              ?>
+
+
+
+              <!-- -------------- -->
+
+
+              
+
             </div>
           </div>
         </div>
@@ -547,9 +574,9 @@ if ($result->num_rows > 0) {
 <?php
 // Check if the connection is still open before closing
 if (isset($conn) && $conn instanceof mysqli) {
-    if (!$conn->connect_errno) {
-        $conn->close();
-    }
+  if (!$conn->connect_errno) {
+    $conn->close();
+  }
 }
 
 ?>

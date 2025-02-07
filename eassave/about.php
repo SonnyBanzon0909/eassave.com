@@ -200,34 +200,34 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       </div>
   </div>
   <div class="company-list">
-      <div id="w-node-_21f26ded-0a49-00c9-5bd9-c5bb49e771fc-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+      <div id="w-node-_21f26ded-0a49-00c9-5bd9-c5bb49e771fc-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-_2a207e8a-7d26-1e71-33aa-bbf117199366-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-_2a207e8a-7d26-1e71-33aa-bbf117199366-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-f3ee8c67-0af2-b7f4-d8f0-6fb015c2fea2-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-f3ee8c67-0af2-b7f4-d8f0-6fb015c2fea2-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-_79cba9fb-f228-66ae-7211-dd48f727976e-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-_79cba9fb-f228-66ae-7211-dd48f727976e-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-e188d05d-7f9e-70f0-12cd-46df9bb4d741-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-e188d05d-7f9e-70f0-12cd-46df9bb4d741-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-f663af44-2191-8c6d-2f9c-4c5fbdb4cc00-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-f663af44-2191-8c6d-2f9c-4c5fbdb4cc00-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-_8d210f32-9c23-8868-0f1e-d8a06dd37c91-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-_8d210f32-9c23-8868-0f1e-d8a06dd37c91-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-_1f46c745-4809-d3d2-6d2a-b137e40be910-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-_1f46c745-4809-d3d2-6d2a-b137e40be910-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-_54bf0737-d8c1-6822-8c47-7b7d0d9a8921-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-_54bf0737-d8c1-6822-8c47-7b7d0d9a8921-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
-    <div id="w-node-_516d1e47-9f0c-cb38-06ed-41e608441bf0-ae446d1e" class="company-item"><img src="images/image-134_1image-134.png" loading="lazy" alt="" class="company-img">
+    <div id="w-node-_516d1e47-9f0c-cb38-06ed-41e608441bf0-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
         <div>PLDT Inc</div>
     </div>
 </div>
