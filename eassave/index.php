@@ -274,76 +274,67 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
           <h3 class="text-align-center bot-48">Hear what the community has to say</h3>
           <div class="testimonial-wrapper">
             <div class="testimonial-list owl-carousel owl-theme">
-              <div class="testimonial-item">
-                <div class="border-gradient pointer-events-off"></div>
-                <div class="testimonial-content-con">
-                  <div class="star-wrapper"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"></div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.</p>
-                  <div class="profile-wrapper"><img src="images/Profile_1Profile.png" loading="eager" alt="" class="profile">
-                    <div class="profile-detail-wrapper">
-                      <div class="name">Michelle</div>
-                      <div class="position">Writer</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-item">
-                <div class="border-gradient pointer-events-off"></div>
-                <div class="testimonial-content-con">
-                  <div class="star-wrapper"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"></div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p>
-                  <div class="profile-wrapper"><img src="images/Profile_1Profile.png" loading="eager" alt="" class="profile">
-                    <div class="profile-detail-wrapper">
-                      <div class="name">Michelle</div>
-                      <div class="position">Writer</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-item">
-                <div class="border-gradient pointer-events-off"></div>
-                <div class="testimonial-content-con">
-                  <div class="star-wrapper"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"></div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.</p>
-                  <div class="profile-wrapper"><img src="images/Profile_1Profile.png" loading="eager" alt="" class="profile">
-                    <div class="profile-detail-wrapper">
-                      <div class="name">Michelle</div>
-                      <div class="position">Writer</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-item">
-                <div class="border-gradient pointer-events-off"></div>
-                <div class="testimonial-content-con">
-                  <div class="star-wrapper"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"></div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris.</p>
-                  <div class="profile-wrapper"><img src="images/Profile_1Profile.png" loading="eager" alt="" class="profile">
-                    <div class="profile-detail-wrapper">
-                      <div class="name">Michelle</div>
-                      <div class="position">Writer</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="testimonial-item">
-                <div class="border-gradient pointer-events-off"></div>
-                <article class="testimonial-content-con">
-                  <div class="star-wrapper"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"><img src="images/star.svg" loading="eager" alt="" class="star"></div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p>
-                  <div class="profile-wrapper"><img src="images/Profile_1Profile.png" loading="eager" alt="" class="profile">
-                    <div class="profile-detail-wrapper">
-                      <div class="name">Michelle</div>
-                      <div class="position">Writer</div>
-                    </div>
-                  </div>
-                </article>
-              </div>
+
+
+<!-- ------------- -->
+
+<?php
+// Select query for reviews table
+$select_query = "SELECT id, rating, name, position, image, content, created_at, updated_at FROM reviews ORDER BY id ASC";
+$result = $conn->query($select_query);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Determine how many stars to display based on the rating
+        $stars = '';
+        for ($i = 1; $i <= 5; $i++) {
+            if ($i <= $row['rating']) {
+                $stars .= '<img src="images/star.svg" loading="eager" alt="star" class="star">';
+            }  
+        }
+
+        echo '<div class="testimonial-item">';
+        echo '  <div class="border-gradient pointer-events-off"></div>';
+        echo '  <div class="testimonial-content-con">';
+        
+        // Display stars based on rating
+        echo '    <div class="star-wrapper">' . $stars . '</div>';
+        
+        // Display review content
+        echo '    <p>' . htmlspecialchars($row['content']) . '</p>';
+        
+        // Display profile
+        echo '    <div class="profile-wrapper">';
+        echo '      <img src="' . htmlspecialchars($row['image']) . '" loading="eager" alt="profile image" class="profile">';
+        echo '      <div class="profile-detail-wrapper">';
+        echo '        <div class="name">' . htmlspecialchars($row['name']) . '</div>';
+        echo '        <div class="position">' . htmlspecialchars($row['position']) . '</div>';
+        echo '      </div>';
+        echo '    </div>';
+        echo '  </div>';
+        echo '</div>';
+    }
+} else {
+    echo "No reviews found.";
+}
+
+
+?>
+
+
+
+<!-- ------------- -->
+
+
+  
+
+
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <section class="section-cta">
       <div class="padding-global">
         <div class="container-large">
