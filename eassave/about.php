@@ -143,7 +143,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       echo "No gallery items found.";
     }
 
- 
+
     ?>
 
 
@@ -205,20 +205,64 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
           <div>A small river named Duden flows by their place and supplies it with the necessary regelialia.</div>
         </div>
         <div id="w-node-_68bec482-a5c5-3aa9-1b0a-592d44e68601-ae446d1e" class="partner-form-block w-form">
+
+
           <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="filter-form" data-wf-page-id="665f147b743ba95cae446d1e" data-wf-element-id="68bec482-a5c5-3aa9-1b0a-592d44e68602">
+
             <div class="select-wrapper"><select id="Industry" name="Industry" data-name="Industry" class="select w-select">
               <option value="">Industry</option>
-              <option value="First">First choice</option>
-              <option value="Second">Second choice</option>
-              <option value="Third">Third choice</option>
+
+
+
+              <!-- ---------- -->
+
+              <?php
+// Select query for about_companies table, fetching distinct industries
+              $select_query = "SELECT DISTINCT industry FROM about_companies ORDER BY industry ASC";
+              $result = $conn->query($select_query);
+
+              if ($result->num_rows > 0) {
+    // Loop through the results and echo each option
+                while ($row = $result->fetch_assoc()) {
+                  echo '<option value="' . htmlspecialchars($row['industry']) . '">' . htmlspecialchars($row['industry']) . '</option>';
+                }
+              } else {
+                echo "<option>No industries found</option>";
+              }
+              ?>
+
+              <!-- ---------- -->
+
+
+
+
             </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon"></div>
+            
             <div class="select-wrapper"><select id="Country" name="Country" data-name="Country" class="select w-select">
               <option value="">Country</option>
-              <option value="First">First choice</option>
-              <option value="Second">Second choice</option>
-              <option value="Third">Third choice</option>
+              <!-- ---------- -->
+
+              <?php
+// Select query for about_companies table, fetching distinct industries
+              $select_query = "SELECT DISTINCT country FROM about_companies ORDER BY industry ASC";
+              $result = $conn->query($select_query);
+
+              if ($result->num_rows > 0) {
+    // Loop through the results and echo each option
+                while ($row = $result->fetch_assoc()) {
+                  echo '<option value="' . htmlspecialchars($row['country']) . '">' . htmlspecialchars($row['country']) . '</option>';
+                }
+              } else {
+                echo "<option>No industries found</option>";
+              }
+              ?>
+
+              <!-- ---------- -->
             </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon"></div>
+
           </form>
+
+
           <div class="w-form-done">
             <div>Thank you! Your submission has been received!</div>
           </div>
@@ -228,36 +272,38 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
         </div>
       </div>
       <div class="company-list">
-        <div id="w-node-_21f26ded-0a49-00c9-5bd9-c5bb49e771fc-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-_2a207e8a-7d26-1e71-33aa-bbf117199366-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-f3ee8c67-0af2-b7f4-d8f0-6fb015c2fea2-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-_79cba9fb-f228-66ae-7211-dd48f727976e-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-e188d05d-7f9e-70f0-12cd-46df9bb4d741-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-f663af44-2191-8c6d-2f9c-4c5fbdb4cc00-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-_8d210f32-9c23-8868-0f1e-d8a06dd37c91-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-_1f46c745-4809-d3d2-6d2a-b137e40be910-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-_54bf0737-d8c1-6822-8c47-7b7d0d9a8921-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
-        <div id="w-node-_516d1e47-9f0c-cb38-06ed-41e608441bf0-ae446d1e" class="company-item"><img src="images/image-134_1image 134.png" loading="lazy" alt="" class="company-img">
-          <div>PLDT Inc</div>
-        </div>
+
+        <!-- ---------- -->
+
+        <?php
+// Select query for about_companies table, including industry and country
+        $select_query = "SELECT id, name, image, industry, country FROM about_companies ORDER BY id ASC";
+        $result = $conn->query($select_query);
+
+        if ($result->num_rows > 0) {
+    // Loop through the results and echo each company item with data attributes
+          while ($row = $result->fetch_assoc()) {
+            echo '<div id="w-node-' . uniqid() . '" class="company-item" ';
+            echo 'data-industry="' . htmlspecialchars($row['industry']) . '" ';
+            echo 'data-country="' . htmlspecialchars($row['country']) . '">';
+            echo '<img src="images/' . $row['image'] . '" loading="lazy" alt="" class="company-img">';
+            echo '<div>' . htmlspecialchars($row['name']) . '</div>';
+            echo '</div>';
+          }
+        } else {
+          echo "No companies found.";
+        }
+        ?>
+
+
+
+
+        <!-- ---------- -->
+
+
+
+
+
       </div>
     </div>
   </div>
@@ -390,5 +436,39 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
  }          
 });
 </script>
+
+<script>
+  // Wait for the DOM to fully load
+  document.addEventListener('DOMContentLoaded', function () {
+    const industrySelect = document.getElementById('Industry');
+    const countrySelect = document.getElementById('Country');
+    const companyList = document.querySelector('.company-list');
+    const companyItems = companyList.querySelectorAll('.company-item'); // Assuming company-item class is used for each item
+
+    // Filter function to show or hide companies based on selection
+    function filterCompanies() {
+      const selectedIndustry = industrySelect.value.toLowerCase();
+      const selectedCountry = countrySelect.value.toLowerCase();
+
+      companyItems.forEach(item => {
+        const companyIndustry = item.getAttribute('data-industry').toLowerCase(); // Assuming the data-industry attribute stores the industry
+        const companyCountry = item.getAttribute('data-country').toLowerCase(); // Assuming the data-country attribute stores the country
+
+        // Check if both industry and country match
+        if ((selectedIndustry === "" || companyIndustry.includes(selectedIndustry)) &&
+          (selectedCountry === "" || companyCountry.includes(selectedCountry))) {
+          item.style.display = ''; // Show the item
+      } else {
+          item.style.display = 'none'; // Hide the item
+        }
+      });
+    }
+
+    // Attach event listeners to the selects
+    industrySelect.addEventListener('change', filterCompanies);
+    countrySelect.addEventListener('change', filterCompanies);
+  });
+</script>
+
 </body>
 </html>
