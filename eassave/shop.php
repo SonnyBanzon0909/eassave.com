@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 
-  
+
 
 // Redirect to /login if the user is not logged in
 if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
@@ -266,44 +266,57 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
-                  <?php
-// Select query for the 'shop' table
-                  $select_query = "SELECT id, name, type, color, pattern, price, link FROM shop ORDER BY id ASC";
-                  $result = $conn->query($select_query);
+<?php
+// Select query for the shop table to fetch items
+$select_query = "SELECT id, name, type, colors, is_solid_color, patterns, price, link FROM shop ORDER BY id ASC";
+$result = $conn->query($select_query);
 
-                  if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-    // Determine if type is 'image' or 'color'
-                      if ($row['type'] == 'image') 
-                      {
-      // Set the pattern in the background for image type
-                        echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block">';
-                        echo '  <div class="shop-img-wrapper"><img src="images/Card-Blue.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 35vw, (max-width: 991px) 16vw, 18vw" srcset="images/Card-Blue-p-500.png 500w, images/Card-Blue.png 934w" alt=""></div>';
-                        echo '  <div class="color-wrapper">';
-                        echo '    <div class="color-box" style="background: url(' . htmlspecialchars($row['pattern']) . '); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>';
-                        echo '  </div>';
-                      } 
-                      elseif ($row['type'] == 'color') 
-                      {
-      // Set the color in box-1 and box-2 for color type
-      $colors = explode(',', $row['color']); // Assuming color is stored as a comma-separated list
-      echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block">';
-      echo '  <div class="shop-img-wrapper"><img src="images/Card-Blue.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 35vw, (max-width: 991px) 16vw, 18vw" srcset="images/Card-Blue-p-500.png 500w, images/Card-Blue.png 934w" alt=""></div>';
-      echo '  <div class="color-wrapper">';
-      echo '    <div class="color-box" style="background:none">';
-      echo '      <div class="box-1" style="background: ' . htmlspecialchars($colors[0]) . ';"></div>';
-      echo '      <div class="box-2" style="background: ' . htmlspecialchars($colors[1]) . ';"></div>';
-      echo '    </div>';
-      echo '  </div>';
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        
+        // Exploding colors and patterns into arrays for handling
+        $colors = explode(',', $row['colors']);
+        $patterns = $row['patterns'] ? explode(',', $row['patterns']) : [];
+
+        // Display each item in a card
+        echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block">';
+        echo '  <div class="shop-img-wrapper"><img src="images/Card-Blue.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 35vw, (max-width: 991px) 16vw, 18vw" srcset="images/Card-Blue-p-500.png 500w, images/Card-Blue.png 934w" alt=""></div>';
+        echo '  <div class="color-wrapper">';
+
+        // If type is color (either solid or combination)
+        if (strpos($row['type'], 'color') !== false) {
+            foreach ($colors as $color) {
+                $color = trim($color);  // Remove any extra spaces
+                // Check if the current color is a solid color or a combination
+                if ($row['is_solid_color'] == '1') {
+                    echo '    <div class="color-box" style="background:none">';
+                    echo '      <div class="box-1" style="background: ' . htmlspecialchars($color) . ';"></div>';
+                    echo '      <div class="box-2" style="background: ' . htmlspecialchars($color) . ';"></div>';
+                    echo '    </div>';
+                } else {
+                    $color_parts = explode('&', $color); // Handle color combinations like 'blue & green'
+                    echo '    <div class="color-box" style="background:none">';
+                    echo '      <div class="box-1" style="background: ' . htmlspecialchars(trim($color_parts[0])) . ';"></div>';
+                    echo '      <div class="box-2" style="background: ' . htmlspecialchars(trim($color_parts[1] ?? $color)) . ';"></div>';
+                    echo '    </div>';
+                }
+            }
+        }
+
+        // If type is pattern
+        if (strpos($row['type'], 'pattern') !== false) {
+            foreach ($patterns as $pattern) {
+                echo '    <div class="color-box" style="background: url(' . htmlspecialchars($pattern) . '); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>';
+            }
+        }
+
+        echo '  </div>';
+        echo '  <div class="heading-style-h6">' . htmlspecialchars($row['name']) . '</div>';
+        echo '  <div class="price">₱' . number_format($row['price'], 2) . '</div>';
+        echo '</a>';
     }
-    echo '  <div class="heading-style-h6">' . htmlspecialchars($row['name']) . '</div>';
-    echo '  <div class="price">₱' . number_format($row['price'], 2) . '</div>';
-    echo '</a>';
-  }
-} 
-else 
-{
-  echo "No products found.";
+} else {
+    echo "No products found.";
 }
 ?>
 
@@ -311,22 +324,24 @@ else
 
 
 
-</div>
-</div>
-<div id="w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d" class="shop-cta-wrapper">
-  <div class="cta-container">
-    <h4>Customize your card now!</h4>
-    <div class="cta-excerpt">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</div>
-    <a data-w-id="57ab25cb-5387-6917-cce6-4d6a7f2c6328" href="#" class="button is-icon w-inline-block">
-      <div class="btn-text">Start customizing now</div>
-      <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
-      </svg></div>
-      <div class="button-overlay pointer-events-off"></div>
-    </a>
+
+
+      </div>
+    </div>
+    <div id="w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d" class="shop-cta-wrapper">
+      <div class="cta-container">
+        <h4>Customize your card now!</h4>
+        <div class="cta-excerpt">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</div>
+        <a data-w-id="57ab25cb-5387-6917-cce6-4d6a7f2c6328" href="#" class="button is-icon w-inline-block">
+          <div class="btn-text">Start customizing now</div>
+          <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
+          </svg></div>
+          <div class="button-overlay pointer-events-off"></div>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>
 </div>
 </section>
