@@ -148,7 +148,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" class="dropdown w-dropdown">
+                      <div data-hover="false" data-delay="500" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -193,7 +193,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" class="dropdown w-dropdown">
+                      <div data-hover="false" data-attr="<?php echo $question; ?>" data-delay="500" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -239,7 +239,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" class="dropdown w-dropdown">
+                      <div data-hover="false" data-delay="500" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -285,7 +285,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" class="dropdown w-dropdown">
+                      <div data-hover="false" data-delay="500" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -392,7 +392,23 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=665f147b743ba95cae446cfe" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="js/webflow.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
 <script>
+  document.getElementById("Search").addEventListener("input", function () {
+    const searchValue = this.value.toLowerCase(); // Get the search value in lowercase
+    const faqItems = document.querySelectorAll(".faq-item-dropdown"); // Get all FAQ items
+
+    faqItems.forEach(faq => {
+      const question = faq.getAttribute("data-attr").toLowerCase(); // Get the question text in lowercase
+      if (question.includes(searchValue)) {
+        faq.style.display = ""; // Show the FAQ item if it matches the search
+      } else {
+        faq.style.display = "none"; // Hide the FAQ item if it doesn't match
+      }
+    });
+  });
+ 
 // Get the current year
   var currentYear = new Date().getFullYear();
 // Get the current year when the page loads
