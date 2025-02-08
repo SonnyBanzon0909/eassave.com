@@ -31,7 +31,7 @@
               <a id="w-node-e4fbf7dd-3bcd-6851-fea2-c39a6866983e-6866982c" href="affiliates.php" class="text-size-small nav-link light-nav-link">Affiliate</a>
               <a id="w-node-e4fbf7dd-3bcd-6851-fea2-c39a68669840-6866982c" href="frequently-asked-questions.php" class="text-size-small nav-link light-nav-link">FAQ</a>
               <a id="w-node-e4fbf7dd-3bcd-6851-fea2-c39a68669842-6866982c" href="contact.php" class="text-size-small nav-link light-nav-link">Contact Us</a>
-              <a id="w-node-e4fbf7dd-3bcd-6851-fea2-c39a68669844-6866982c" href="blogs.php" class="text-size-small nav-link light-nav-link">Blogs</a>
+              <!-- <a id="w-node-e4fbf7dd-3bcd-6851-fea2-c39a68669844-6866982c" href="blogs.php" class="text-size-small nav-link light-nav-link">Blogs</a> -->
             </div>
           </div>
 
@@ -41,11 +41,14 @@
           <div id="login-button" class="login-wrapper light-login-wrapper">
 
             <div id="activation-wrapper" class="nav-links-wraper _2-cols">
+
               <a id="w-node-e4fbf7dd-3bcd-6851-fea2-c39a68669847-6866982c" href="auth/activate-card.php" class="text-size-regular activate-btn">Activate Card</a>
 
-              <?php if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] == false) : ?>
 
-              <a data-w-id="e4fbf7dd-3bcd-6851-fea2-c39a68669849" href="auth/login.php" class="button is-icon w-inline-block">
+ 
+              <?php if ( $_SESSION['is_login'] === false) : ?>
+
+              <a data-w-id="e4fbf7dd-3bcd-6851-fea2-c39a68669849" href="auth/login.php" class="button is-icon w-inline-block login-btn-wrapper">
                 <div class="btn-text">Login</div>
                 <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
@@ -67,6 +70,8 @@
               </svg></div>
               <div class="cart-count">3</div>
             </div>
+
+
             <div data-hover="false" data-delay="500" data-w-id="e4fbf7dd-3bcd-6851-fea2-c39a68669853" class="login-dropdown light-login-dropdown w-dropdown">
               <div class="dropdown-toggle login-toggle w-dropdown-toggle"><img src="images/Ellipse-77_1Ellipse%2077.png" loading="eager" alt="" class="profile-img">
                 <div class="icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
@@ -117,7 +122,7 @@
             <a href="affiliates.php" class="text-size-small nav-link secondary-nav-link light-secondary-navlink">Affiliate</a>
             <a href="frequently-asked-questions.php" class="text-size-small nav-link secondary-nav-link light-secondary-navlink">FAQ</a>
             <a href="contact.php" class="text-size-small nav-link secondary-nav-link light-secondary-navlink">Contact Us</a>
-            <a href="blogs.php" class="text-size-small nav-link secondary-nav-link light-secondary-navlink">Blogs</a>
+            <!-- <a href="blogs.php" class="text-size-small nav-link secondary-nav-link light-secondary-navlink">Blogs</a> -->
             <a href="activate-card.php" class="text-size-small nav-link secondary-nav-link light-secondary-navlink">Activate Cards</a>
           </div>
           <div class="mobile-nav-link-wrapper dark-mobile-navlink-wrapper">

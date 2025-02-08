@@ -61,7 +61,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   <div class="page-wrapper">
     <div class="main-wrapper">
       <div class="global-styles w-embed">
-       <!-- Navigation -->
+        
+       <!-- Custom CSS -->
        <?php include 'partials/global-css.css'; ?>
      </div>
 
@@ -89,7 +90,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
           <div id="w-node-_9d0fe101-4d3f-3e10-da33-62c008e64f5a-ae446d1e" class="header-content-wrapper">
             <div class="header-text mobile-header-text">About Us</div>
             <div class="header-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla.</div>
-            <a href="#contact-form" class="arrow-con w-inline-block">
+            <a href="#who-we-are" class="arrow-con w-inline-block">
               <div class="icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="21" viewbox="0 0 15 21" fill="currentColor">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.121763 13.0766C1.90948 13.2405 5.25533 14.4241 6.93587 17.7439L7.21804 0.015026L8.21793 3.59217e-07L7.93577 17.7276C9.723 14.3566 13.1075 13.0722 14.9011 12.8545L14.9912 13.8472C13.0127 14.0873 8.82309 15.8137 7.93407 20.7803L7.44211 20.707L7.33426 20.7087L6.83972 20.7967C6.10842 15.8545 1.97179 14.2532 -6.15128e-07 14.0725L0.121763 13.0766Z" fill="currentColor"></path>
               </svg></div>
@@ -100,7 +101,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
     </div>
     <div class="spacer"></div>
   </section>
-  <section class="section-who-we-are">
+  <section class="section-who-we-are" id="who-we-are">
     <div class="padding-global">
       <div class="container-large">
         <div class="who-we-are-grid">
@@ -354,7 +355,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                 </div>
               </div>
             </div>
-            <a data-w-id="db1ea719-ecf5-b56e-1bc2-be1250eef991" href="#" class="button is-icon w-inline-block">
+            <a data-w-id="db1ea719-ecf5-b56e-1bc2-be1250eef991" href="shop.php" class="button is-icon w-inline-block">
               <div class="btn-text">Explore our shop</div>
               <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>

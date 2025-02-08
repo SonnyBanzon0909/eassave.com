@@ -1,12 +1,37 @@
+
 <?php
+
+$_SESSION['is_login'] = false;
+
+
 $root = $_SERVER['DOCUMENT_ROOT'];
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+// Generate a CSRF token if it doesn't exist
+if (empty($_SESSION['csrf_token'])) {
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Check if user is remembered
+include '../../private/login-session.php';  
+
+// Redirect to /login if the user is not logged in
+if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
+    $_SESSION['is_login']= false;
+     
+}
+
 ?>
 
 <!DOCTYPE html><!--  Last Published: Fri Oct 11 2024 08:14:06 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="665f147b743ba95cae446d54" data-wf-site="665f147b743ba95cae446cfe">
 <head>
   <meta charset="utf-8">
-  <title>Activate Card</title>
+  <title>Activate Card </title>
   <meta content="Activate Card" property="og:title">
   <meta content="Activate Card" property="twitter:title">
 

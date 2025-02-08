@@ -36,7 +36,7 @@
               <a id="w-node-_0ce80fb3-12ea-ae45-b05b-d15d1779e94c-1779e93a" href="affiliates.php" class="text-size-small nav-link hide">Affiliate</a>
               <a id="w-node-_0ce80fb3-12ea-ae45-b05b-d15d1779e94e-1779e93a" href="frequently-asked-questions.php" class="text-size-small nav-link">FAQ</a>
               <a id="w-node-_0ce80fb3-12ea-ae45-b05b-d15d1779e950-1779e93a" href="contact.php" class="text-size-small nav-link">Contact Us</a>
-              <a id="w-node-_0ce80fb3-12ea-ae45-b05b-d15d1779e952-1779e93a" href="/blogs.php" class="text-size-small nav-link">Blogs</a>
+              <!-- <a id="w-node-_0ce80fb3-12ea-ae45-b05b-d15d1779e952-1779e93a" href="/blogs.php" class="text-size-small nav-link">Blogs</a> -->
             </div>
           </div>
 
@@ -50,8 +50,8 @@
             
             <a id="w-node-_0ce80fb3-12ea-ae45-b05b-d15d1779e955-1779e93a" href="auth/activate-card.php" class="text-size-regular activate-btn">Activate Card</a>
 
-            <?php if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) : ?>
-            <a data-w-id="0ce80fb3-12ea-ae45-b05b-d15d1779e957" href="auth/login.php" class="button is-icon w-inline-block login-btn-link">
+            <?php if ( $_SESSION['is_login'] === false) : ?>
+            <a data-w-id="0ce80fb3-12ea-ae45-b05b-d15d1779e957" href="auth/login.php" class="button is-icon w-inline-block login-btn-wrapper">
               <div class="btn-text">Login</div>
               <div class="icon-1x1-small w-embed">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -130,7 +130,7 @@
           <a href="affiliates.php" class="text-size-small nav-link secondary-nav-link">Affiliate</a>
           <a href="/frequently-asked-questions.php" class="text-size-small nav-link secondary-nav-link">FAQ</a>
           <a href="/contact.php" class="text-size-small nav-link secondary-nav-link">Contact Us</a>
-          <a href="/blogs.php" class="text-size-small nav-link secondary-nav-link">Blogs</a>
+          <!-- <a href="/blogs.php" class="text-size-small nav-link secondary-nav-link">Blogs</a> -->
           <a href="#" class="text-size-small nav-link secondary-nav-link">Activate Cards</a>
         </div>
         <div class="mobile-nav-link-wrapper">

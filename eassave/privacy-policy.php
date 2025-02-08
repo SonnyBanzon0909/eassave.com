@@ -1,5 +1,37 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+
+
+// Using absolute path to call the configuration file
+require_once '../private/config.php';  // Goes one folder above and accesses the 'private' folder
+
+// Check if user is remembered
+include '../private/login-session.php'; 
+
+
+// Example: Database connection
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+
+// Check the connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+
+// Redirect to /login if the user is not logged in
+if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
+  header("Location: .../../auth/login.php");
+  exit();
+}
+
+
 ?>
 
 

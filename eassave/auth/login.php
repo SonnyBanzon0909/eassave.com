@@ -1,5 +1,10 @@
 
 <?php
+
+$_SESSION['is_login'] = false;
+ 
+
+
 $root = $_SERVER['DOCUMENT_ROOT'];
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -56,15 +61,16 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       <div class="global-styles w-embed">
 
         <style> 
-          .login-btn-link
+          .login-btn-wrapper
           {
             display: flex !important;
           }
-          .login-wrapper
+          .login-dropdown, .cart-wrapper
           {
-            display: none; !important;
+            display: none !important;
           }
         </style>
+
         <!-- Global CSS -->
         <?php include '../partials/global-css.css'; ?>
 

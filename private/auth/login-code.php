@@ -3,7 +3,10 @@ $root = $_SERVER['DOCUMENT_ROOT'];
 
 
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 require_once '../config.php'; // Database config
 $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 

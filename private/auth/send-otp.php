@@ -4,7 +4,9 @@ $root = $_SERVER['DOCUMENT_ROOT'];
 
 
  
-
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 //$_SESSION['user_email'] = $email;
 

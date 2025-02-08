@@ -193,7 +193,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
           <div class="container-large">
             <div class="smart-block-title-wrapper">
               <h2 class="heading-style-h1">Smart Connections with one tap.</h2>
-              <a data-w-id="f8ae75de-e514-0ab7-9a1e-704a64c28c25" href="#" class="button is-icon w-inline-block">
+              <a data-w-id="f8ae75de-e514-0ab7-9a1e-704a64c28c25" href="shop.php" class="button is-icon w-inline-block">
                 <div class="btn-text">Explore our shop</div>
                 <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
@@ -381,7 +381,7 @@ if ($result->num_rows > 0) {
                     </div>
                   </div>
                 </div>
-                <a data-w-id="db1ea719-ecf5-b56e-1bc2-be1250eef991" href="#" class="button is-icon w-inline-block">
+                <a data-w-id="db1ea719-ecf5-b56e-1bc2-be1250eef991" href="shop.php" class="button is-icon w-inline-block">
                   <div class="btn-text">Explore our shop</div>
                   <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>

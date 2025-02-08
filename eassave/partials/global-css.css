@@ -423,4 +423,58 @@ input[type="number"]::-webkit-outer-spin-button {
 {
   min-height: 400px;
 }
+
+.success-pop-card {
+    border-radius: 5px;
+    flex-direction: column;
+    align-items: center;
+    max-width: 442px;
+    padding: 90px 25px 60px 25px;
+    display: flex;
+    position: relative;
+    box-shadow: -28px 28px 100px #585c6233;
+}
+.success-title {
+    color: #161616;
+    text-align: center;
+    margin-bottom: 12px;
+    font-family: Alegreya Sans, sans-serif;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 48px;
+}
+.big-body-text.success-excerpt {
+    text-align: center;
+    max-width: 275px;
+    font-family: Open Sans, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+}
+.big-body-text {
+    color: #363636;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+}
+.close-success {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.success-con {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 100vh;
+    padding-top: 160px;
+    padding-bottom: 100px;
+    display: flex;
+}
+.success-excerpt
+{
+  margin-bottom: 16px;
+}
 </style>

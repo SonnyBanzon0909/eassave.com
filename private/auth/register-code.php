@@ -2,7 +2,9 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 
 // Start the session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
 // Example: Database connection
 require_once '../config.php'; // Database configuration
