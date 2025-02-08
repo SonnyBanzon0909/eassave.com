@@ -395,20 +395,52 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 <script>
+
   document.getElementById("Search").addEventListener("input", function () {
-    const searchValue = this.value.toLowerCase(); // Get the search value in lowercase
-    const faqItems = document.querySelectorAll(".faq-item-dropdown"); // Get all FAQ items
+    const searchValue = this.value.toLowerCase();
+    const faqItems = document.querySelectorAll(".faq-item-dropdown");
 
     faqItems.forEach(faq => {
-      const question = faq.getAttribute("data-attr").toLowerCase(); // Get the question text in lowercase
-      if (question.includes(searchValue)) {
-        faq.style.display = ""; // Show the FAQ item if it matches the search
+      const questionElement = faq.querySelector(".dropdown-toggle > div");
+      const questionText = questionElement.textContent;
+      const searchValueRegex = new RegExp(`(${searchValue})`, "gi");
+
+      if (searchValue && questionText.toLowerCase().includes(searchValue)) {
+        faq.style.display = "";
+        questionElement.innerHTML = questionText.replace(
+          searchValueRegex,
+          '<span class="highlight">$1</span>'
+          );
       } else {
-        faq.style.display = "none"; // Hide the FAQ item if it doesn't match
+        if (searchValue != "")  
+        {
+          faq.style.display = "none";
+          questionElement.textContent = questionText;
+        }
+        else
+        {
+           
+          questionElement.textContent = questionText;
+        }
       }
     });
   });
- 
+
+
+  // document.getElementById("Search").addEventListener("input", function () {
+  //   const searchValue = this.value.toLowerCase(); // Get the search value in lowercase
+  //   const faqItems = document.querySelectorAll(".faq-item-dropdown"); // Get all FAQ items
+
+  //   faqItems.forEach(faq => {
+  //     const question = faq.getAttribute("data-attr").toLowerCase(); // Get the question text in lowercase
+  //     if (question.includes(searchValue)) {
+  //       faq.style.display = ""; // Show the FAQ item if it matches the search
+  //     } else {
+  //       faq.style.display = "none"; // Hide the FAQ item if it doesn't match
+  //     }
+  //   });
+  // });
+
 // Get the current year
   var currentYear = new Date().getFullYear();
 // Get the current year when the page loads
