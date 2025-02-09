@@ -87,12 +87,17 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                   <div>Sort by:</div>
                   <div class="form-block-2 w-form">
                     <form id="wf-form-Sort-By" name="wf-form-Sort-By" data-name="Sort By" method="get" data-wf-page-id="665f147b743ba95cae446d3d" data-wf-element-id="4caa369c-8bef-9795-cc90-eccc56280dca">
-                      <div class="select-wrapper"><select id="sort-by" name="sort-by" data-name="sort-by" class="select-field w-select">
-                        <option value="">Most Popular</option>
-                        <option value="First">First choice</option>
-                        <option value="Second">Second choice</option>
-                        <option value="Third">Third choice</option>
-                      </select><img loading="lazy" src="images/down.svg" alt="" class="select-icon"></div>
+
+                      <div class="select-wrapper">
+                        <select id="sort-by" name="sort-by" data-name="sort-by" class="select-field w-select">
+                          <option value="Most Popular">Most Popular</option>
+                          <option value="Best Selling">Best Selling</option>
+                          <option value="Highest Rated">Highest Rated</option>
+                          <option value="Newest Arrivals">Newest Arrivals</option>
+                        </select>
+                        <img loading="lazy" src="images/down.svg" alt="" class="select-icon">
+                      </div>
+
                     </form>
                     <div class="w-form-done">
                       <div>Thank you! Your submission has been received!</div>
@@ -266,59 +271,60 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
-<?php
+                  <?php
 // Select query for the shop table to fetch items
-$select_query = "SELECT id, name, type, colors, is_solid_color, patterns, price, link FROM shop ORDER BY id ASC";
-$result = $conn->query($select_query);
+                  $select_query = "SELECT id, name, type, colors, is_solid_color, patterns, price, link,popularity,sales,rating,created_at FROM shop ORDER BY popularity DESC";
+                  $result = $conn->query($select_query);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+
         // Exploding colors and patterns into arrays for handling
-        $colors = explode(',', $row['colors']);
-        $patterns = $row['patterns'] ? explode(',', $row['patterns']) : [];
+                      $colors = explode(',', $row['colors']);
+                      $patterns = $row['patterns'] ? explode(',', $row['patterns']) : [];
 
         // Display each item in a card
-        echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block">';
-        echo '  <div class="shop-img-wrapper"><img src="images/Card-Blue.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 35vw, (max-width: 991px) 16vw, 18vw" srcset="images/Card-Blue-p-500.png 500w, images/Card-Blue.png 934w" alt=""></div>';
-        echo '  <div class="color-wrapper">';
+                      echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block" data-popularity="' . htmlspecialchars($row['popularity']) . '" data-sales="' . htmlspecialchars($row['sales']) . '" data-rating="' . htmlspecialchars($row['rating']) . '" data-created="' . htmlspecialchars($row['created_at']) . '">';
+
+                      echo '  <div class="shop-img-wrapper"><img src="images/Card-Blue.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 35vw, (max-width: 991px) 16vw, 18vw" srcset="images/Card-Blue-p-500.png 500w, images/Card-Blue.png 934w" alt=""></div>';
+                      echo '  <div class="color-wrapper">';
 
         // If type is color (either solid or combination)
-        if (strpos($row['type'], 'color') !== false) {
-            foreach ($colors as $color) {
+                      if (strpos($row['type'], 'color') !== false) {
+                        foreach ($colors as $color) {
                 $color = trim($color);  // Remove any extra spaces
                 // Check if the current color is a solid color or a combination
                 if ($row['is_solid_color'] == '1') {
-                    echo '    <div class="color-box" style="background:none">';
-                    echo '      <div class="box-1" style="background: ' . htmlspecialchars($color) . ';"></div>';
-                    echo '      <div class="box-2" style="background: ' . htmlspecialchars($color) . ';"></div>';
-                    echo '    </div>';
+                  echo '    <div class="color-box" style="background:none">';
+                  echo '      <div class="box-1" style="background: ' . htmlspecialchars($color) . ';"></div>';
+                  echo '      <div class="box-2" style="background: ' . htmlspecialchars($color) . ';"></div>';
+                  echo '    </div>';
                 } else {
                     $color_parts = explode('&', $color); // Handle color combinations like 'blue & green'
                     echo '    <div class="color-box" style="background:none">';
                     echo '      <div class="box-1" style="background: ' . htmlspecialchars(trim($color_parts[0])) . ';"></div>';
                     echo '      <div class="box-2" style="background: ' . htmlspecialchars(trim($color_parts[1] ?? $color)) . ';"></div>';
                     echo '    </div>';
+                  }
                 }
-            }
-        }
+              }
 
         // If type is pattern
-        if (strpos($row['type'], 'pattern') !== false) {
-            foreach ($patterns as $pattern) {
-                echo '    <div class="color-box" style="background: url(' . htmlspecialchars($pattern) . '); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>';
+              if (strpos($row['type'], 'pattern') !== false) {
+                foreach ($patterns as $pattern) {
+                  echo '    <div class="color-box" style="background: url(' . htmlspecialchars($pattern) . '); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>';
+                }
+              }
+
+              echo '  </div>';
+              echo '  <div class="heading-style-h6">' . htmlspecialchars($row['name']) . '</div>';
+              echo '  <div class="price">₱' . number_format($row['price'], 2) . '</div>';
+              echo '</a>';
             }
-        }
-
-        echo '  </div>';
-        echo '  <div class="heading-style-h6">' . htmlspecialchars($row['name']) . '</div>';
-        echo '  <div class="price">₱' . number_format($row['price'], 2) . '</div>';
-        echo '</a>';
-    }
-} else {
-    echo "No products found.";
-}
-?>
+          } else {
+            echo "No products found.";
+          }
+          ?>
 
 
 
@@ -326,23 +332,23 @@ if ($result->num_rows > 0) {
 
 
 
+        </div>
       </div>
-    </div>
-    <div id="w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d" class="shop-cta-wrapper">
-      <div class="cta-container">
-        <h4>Customize your card now!</h4>
-        <div class="cta-excerpt">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</div>
-        <a data-w-id="57ab25cb-5387-6917-cce6-4d6a7f2c6328" href="#" class="button is-icon w-inline-block">
-          <div class="btn-text">Start customizing now</div>
-          <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
-          </svg></div>
-          <div class="button-overlay pointer-events-off"></div>
-        </a>
+      <div id="w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d" class="shop-cta-wrapper">
+        <div class="cta-container">
+          <h4>Customize your card now!</h4>
+          <div class="cta-excerpt">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</div>
+          <a data-w-id="57ab25cb-5387-6917-cce6-4d6a7f2c6328" href="#" class="button is-icon w-inline-block">
+            <div class="btn-text">Start customizing now</div>
+            <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
+            </svg></div>
+            <div class="button-overlay pointer-events-off"></div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 </section>
 
@@ -365,6 +371,47 @@ if ($result->num_rows > 0) {
   });
 </script>
 <script>
+
+
+  document.getElementById('sort-by').addEventListener('change', function () {
+    const sortOption = this.value;  // Get the selected option
+    const cards = document.querySelectorAll('.shop-card');  // Get all the shop cards
+
+    // Convert the NodeList to an array to use Array methods
+    const cardsArray = Array.from(cards);
+
+    // Sort the array based on the selected option
+    let sortedCards;
+    switch (sortOption) {
+        case 'Most Popular':
+            sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-popularity') - a.getAttribute('data-popularity'));
+            break;
+        case 'Best Selling':
+            sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-sales') - a.getAttribute('data-sales'));
+            break;
+        case 'Highest Rated':
+            sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-rating') - a.getAttribute('data-rating'));
+            break;
+        case 'Newest Arrivals':
+            sortedCards = cardsArray.sort((a, b) => new Date(b.getAttribute('data-created')) - new Date(a.getAttribute('data-created')));
+            break;
+        default:
+            sortedCards = cardsArray;
+            break;
+    }
+
+    // Remove all the cards and append the sorted ones
+    const shopCardsContainer = document.querySelector('.shop-list');
+    shopCardsContainer.innerHTML = '';  // Clear current shop cards
+    sortedCards.forEach(card => {
+        shopCardsContainer.appendChild(card);  // Append each sorted card
+    });
+});
+
+
+
+
+
   var swiper = new Swiper('.active-swiper', {
     direction: 'horizontal',
     spacebetween: 24,

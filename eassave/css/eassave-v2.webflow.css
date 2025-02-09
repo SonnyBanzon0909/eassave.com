@@ -2350,6 +2350,7 @@ figcaption {
   align-items: center;
   display: flex;
   position: relative;
+  min-width: 160px;
 }
 
 .select {
@@ -2590,14 +2591,14 @@ figcaption {
 
 .top-line {
   background-color: #1c1c1c;
-  width: 1.5px;
+  width: 2px;
   height: 12px;
 }
 
 .bot-line {
   background-color: #1c1c1c;
   width: 12px;
-  height: 1.5px;
+  height: 2px;
   position: absolute;
 }
 
