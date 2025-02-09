@@ -94,6 +94,18 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
         <div class="padding-global">
           <div class="container-large">
             <div class="auth-wrapper">
+
+
+
+              <div id="notif-popup" class="popup-wrapper">
+                <div class="popup-message"><img src=".../../images/check.png" loading="lazy" alt="">
+                  <div>Phone Number verified. Log in to you account.</div>
+                  <a href="#" class="close w-inline-block"><img src=".../../images/close_24px.svg" loading="lazy" alt=""></a>
+                </div>
+              </div>
+
+
+              
               <div id="w-node-_6781a2ad-69e0-0135-a3da-b0405a444611-ae446d52" class="auth-form-block w-form">
 
 

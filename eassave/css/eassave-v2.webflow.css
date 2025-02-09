@@ -4262,6 +4262,13 @@ figcaption {
   max-width: 561px;
   margin-bottom: 0;
   padding: 38px 60px;
+
+    position: relative;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .login-grid {
@@ -8575,6 +8582,36 @@ figcaption {
     grid-area: 1 / 3 / 3 / 4;
   }
 }
+
+.auth-wrapper
+{
+  position: relative;
+}
+
+.popup-wrapper {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: none;
+  position: absolute;
+  top: -27px;
+}
+
+.popup-message {
+  grid-column-gap: 13px;
+  grid-row-gap: 13px;
+  background-color: #ecffef;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  min-height: 54px;
+  padding: 15px 20px;
+  display: flex;
+}
+
+
+
 
 @media screen and (max-width: 479px) {
   #w-node-ef992205-966c-748f-d053-488a176f95b3-176f958f {

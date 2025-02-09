@@ -112,10 +112,11 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
             <div class="shop-grid">
               <div class="sticky-link-wrapper">
                 <div class="shop-filter-title">Products</div>
-                <div class="link-wrapper">
-                  <a href="#" class="link current">Cards</a>
-                  <a href="#" class="link" data-filter-type="finish" data-filter-value="All">Customize your card</a>
-                  <a href="cards/card-scans.html" class="link">Card Scans</a>
+                <div class="link-wrapper filter-list">
+                  <a href="#" class="link" data-filter-type="type" data-filter-value="All" >All</a>
+                  <a href="#" class="link" data-filter-type="type" data-filter-value="cards" >Cards</a>
+                  <a href="#" class="link" data-filter-type="type" data-filter-value="cards">Customize your card</a>
+                  <a href="cards/card-scans.php" class="link" data-filter-type="type" data-filter-value="plans">Card Scans</a>
                 </div>
 
 
@@ -131,7 +132,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                           <div class="bot-line"></div>
                         </div>
                       </div>
-                      
+
                       <nav class="dropdown-list relative-list w-dropdown-list">
                         <div class="dropdown-wrapper filter-list">
 
@@ -218,9 +219,11 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                   </div>
                 </div>
               </div>
+              
               <div id="w-node-_16f569e4-9907-2073-d95a-fa049fa60384-ae446d3d" class="shop-container">
                 <div class="shop-list">
-                  <div id="w-node-_46651eed-624e-342a-b46a-61425e68d73a-ae446d3d" class="scan-card green-bg-card">
+    
+                  <div id="w-node-_46651eed-624e-342a-b46a-61425e68d73a-ae446d3d" class="scan-card green-bg-card shop-card" data-type="plans">
                     <div class="plan-wrapper">
                       <div class="scan-plan-title-wrapper">
                         <div class="icon-plan-wrapper">
@@ -244,7 +247,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                     </div>
                     <a href="shop/cart.php" class="button button-black">Add to cart</a>
                   </div>
-                  <div id="w-node-_132ee087-e401-c793-9132-5fe5f98ae48b-ae446d3d" class="scan-card violet-bg-card">
+
+                  <div id="w-node-_132ee087-e401-c793-9132-5fe5f98ae48b-ae446d3d" class="scan-card violet-bg-card shop-card" data-type="plans">
                     <div class="plan-wrapper">
                       <div class="scan-plan-title-wrapper">
                         <div class="icon-plan-wrapper">
@@ -270,7 +274,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                     </div>
                     <a href="shop/cart.php" class="button button-black">Add to cart</a>
                   </div>
-                  <div id="w-node-_309c0adf-2ea3-9007-33c2-da1d777b3c1e-ae446d3d" class="scan-card yellow-bg-card">
+
+                  <div id="w-node-_309c0adf-2ea3-9007-33c2-da1d777b3c1e-ae446d3d" class="scan-card yellow-bg-card shop-card" data-type="plans">
                     <div class="plan-wrapper">
                       <div class="scan-plan-title-wrapper">
                         <div class="icon-plan-wrapper">
@@ -316,6 +321,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
         // Display each item in a card
                       echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block" 
+                      data-type="cards" 
                       data-category="' . htmlspecialchars($row['category']) . '" 
                       data-material="' . htmlspecialchars($row['material']) . '" 
                       data-finish="' . htmlspecialchars($row['finish']) . '" 
@@ -451,6 +457,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 // Store the selected filter values in an object
 let selectedFilters = {
+    type: 'All',
     category: 'All',
     material: 'All',
     finish: 'All',
@@ -462,19 +469,21 @@ function filterShopCards() {
     const cards = document.querySelectorAll('.shop-card');
     
     cards.forEach(card => {
+        const cardType = card.getAttribute('data-type');
         const cardCategory = card.getAttribute('data-category');
         const cardMaterial = card.getAttribute('data-material');
         const cardFinish = card.getAttribute('data-finish');
         const cardOrientation = card.getAttribute('data-orientation');
 
         // Check if the card matches all selected filters
+        const matchesType = (selectedFilters.type === 'All' || cardType === selectedFilters.type);
         const matchesCategory = (selectedFilters.category === 'All' || cardCategory === selectedFilters.category);
         const matchesMaterial = (selectedFilters.material === 'All' || cardMaterial === selectedFilters.material);
         const matchesFinish = (selectedFilters.finish === 'All' || cardFinish === selectedFilters.finish);
         const matchesOrientation = (selectedFilters.orientation === 'All' || cardOrientation === selectedFilters.orientation);
 
         // If the card matches all filters, show it, else hide it
-        if (matchesCategory && matchesMaterial && matchesFinish && matchesOrientation) {
+        if (matchesType && matchesCategory && matchesMaterial && matchesFinish && matchesOrientation) {
             card.style.display = '';  // Show the card
         } else {
             card.style.display = 'none';  // Hide the card
