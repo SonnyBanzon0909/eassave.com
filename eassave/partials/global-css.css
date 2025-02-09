@@ -505,6 +505,15 @@ input[type="number"]::-webkit-outer-spin-button {
 {
   border: solid 1px #5028FF !important;
 }
+
+/* Alternative using :has() (works in modern browsers) */
+.radio-btn-wrapper:has(input[type="radio"]:checked) {
+    border: 1px solid black !important;
+     
+     
+}
+
+
 @media screen and (max-width: 479px) {
     #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d, #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d4f {
         grid-area: span 1 / span 1 / span 1 / span 1;
