@@ -148,7 +148,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
+                      <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -193,7 +193,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-attr="<?php echo $question; ?>" data-delay="500" class="dropdown w-dropdown faq-item-dropdown">
+                      <div data-hover="false" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" data-attr="<?php echo $question; ?>" data-delay="500" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -239,7 +239,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
+                      <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
@@ -285,7 +285,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $answer = htmlspecialchars($row['answer'], ENT_QUOTES, 'UTF-8');
                       ?>
 
-                      <div data-hover="false" data-delay="500" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
+                      <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" data-attr="<?php echo $question; ?>" class="dropdown w-dropdown faq-item-dropdown">
                         <div class="dropdown-toggle w-dropdown-toggle">
                           <div><?php echo $question; ?></div>
                           <div class="accordion-wrapper">
