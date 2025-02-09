@@ -35,11 +35,13 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 // Check if a slug is provided in the URL
 if (!isset($_GET['slug']) || empty($_GET['slug'])) {
-   ///// header("Location: shop.php"); // Redirect to an error page if no slug is found
-   /////////// exit();
+   header("Location: ../shop.php"); // Redirect to an error page if no slug is found
+   exit();
 }
 
-$slug = $_GET['slug'];
+// Get the slug from the URL safely
+$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
+
 
 // Use prepared statements to prevent SQL Injection
 $stmt = $conn->prepare("SELECT * FROM shop WHERE slug = ?");
@@ -48,8 +50,8 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows == 0) {
-    ///////////////header("Location: ../404.html"); // Redirect if slug doesn't exist
-   /////////////////// exit();
+    header("Location: ../404.html"); // Redirect if slug doesn't exist
+    exit();
 }
 
 $product = $result->fetch_assoc(); // Fetch product details
@@ -138,20 +140,114 @@ $stmt->close();
     <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" data-name="Contact Form" method="get" data-wf-page-id="67a86872b0be4e2d0faf136e" data-wf-element-id="9679e5f6-ffcb-a435-7b22-1bd3a0a1449a">
       <div class="details-color-wrapper">
         <div>Color:</div>
-        <div class="color-list"><label class="radio-btn-wrapper w-radio">
-            <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-input w-radio-input"></div><input type="radio" name="color" id="color" data-name="color" required="" style="opacity:0;position:absolute;z-index:-1" value="color">
-            <div class="color-box rounded">
-              <div class="box-1"></div>
-              <div class="box-2"></div>
-          </div><span class="radio-btn-label w-form-label" for="color">Radio</span>
-      </label><label class="radio-btn-wrapper w-radio">
-        <div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-input w-radio-input"></div><input type="radio" name="color" id="color-2" data-name="Color 2" required="" style="opacity:0;position:absolute;z-index:-1" value="color">
-        <div class="color-box rounded">
-          <div class="box-1"></div>
-          <div class="box-2"></div>
-      </div><span class="radio-btn-label w-form-label" for="color-2">Radio</span>
-  </label></div>
+        <div class="color-list">
+
+
+
+
+
+           <?php
+
+           if (!empty($slug)) {
+    // Use a prepared statement to prevent SQL injection
+            $select_query = "SELECT * FROM shop WHERE slug = ?";
+            $stmt = $conn->prepare($select_query);
+            $stmt->bind_param("s", $slug);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+
+
+
+
+
+
+            // Convert colors and patterns from database (assuming stored as JSON or comma-separated)
+            $colors = isset($row['colors']) ? explode(',', $row['colors']) : []; // Adjust if stored differently
+            $patterns = isset($row['patterns']) ? explode(',', $row['patterns']) : [];
+
+            // If type is color (either solid or combination)
+            if (strpos($row['type'], 'color') !== false) {
+                foreach ($colors as $color) {
+                    $color = trim($color); // Remove extra spaces
+
+                    // Check if the current color is solid
+                    if ($row['is_solid_color'] == '1') {
+
+                        echo '<label class="radio-btn-wrapper w-radio">';
+                        echo '<div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-input w-radio-input"></div>';
+                        echo '<input type="radio" name="color" id="color" data-name="color" required="" style="opacity:0;position:absolute;z-index:-1" value="color">';
+
+                        echo '<div class="color-box rounded" style="background:none">';
+                        echo '<div class="box-1" style="background: ' . htmlspecialchars($color) . ';"></div>';
+                        echo '<div class="box-2" style="background: ' . htmlspecialchars($color) . ';"></div>';
+                        echo '</div>';
+
+                        echo '<span class="radio-btn-label w-form-label" for="color">'. htmlspecialchars($color) . '</span>';
+                        echo '</label>';
+
+                    } else {
+                        // Handle color combinations (e.g., "blue & green")
+                        $color_parts = explode('&', $color);
+
+                        echo '<label class="radio-btn-wrapper w-radio">';
+                        echo '<div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-input w-radio-input"></div>';
+                        echo '<input type="radio" name="color" id="color" data-name="color" required="" style="opacity:0;position:absolute;z-index:-1" value="color">';
+
+                        echo '<div class="color-box rounded" style="background:none">';
+                        echo '<div class="box-1" style="background: ' . htmlspecialchars(trim($color_parts[0])) . ';"></div>';
+                        echo '<div class="box-2" style="background: ' . htmlspecialchars(trim($color_parts[1] ?? $color)) . ';"></div>';
+                        echo '</div>';
+
+                        echo '<span class="radio-btn-label w-form-label" for="color">'. htmlspecialchars($color) . '</span>';
+                        echo '</label>';
+                    }
+                }
+            }
+
+            // If type is pattern
+            if (strpos($row['type'], 'pattern') !== false) {
+                foreach ($patterns as $pattern) {
+
+                    echo '<label class="radio-btn-wrapper w-radio">';
+                    echo '<div class="w-form-formradioinput w-form-formradioinput--inputType-custom radio-input w-radio-input"></div>';
+                    echo '<input type="radio" name="color" id="color" data-name="color" required="" style="opacity:0;position:absolute;z-index:-1" value="color">';
+
+
+                    echo '<div class="color-box rounded" style="background: url(' . htmlspecialchars($pattern) . '); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>';
+
+                    echo '<span class="radio-btn-label w-form-label" for="color">'. htmlspecialchars($pattern) . '</span>';
+                    echo '</label>';
+
+                }
+            }
+        }
+    } else {
+        echo "No products found.";
+    }
+
+    // Close the statement
+    $stmt->close();
+} else {
+    echo "Invalid product.";
+}
+?>
+
+
+
+
+
+
+
+
+
+
 </div>
+</div>
+
+
 <div class="line-separator"></div>
 <div class="details-form-grid">
     <div id="w-node-_9679e5f6-ffcb-a435-7b22-1bd3a0a144a8-0faf136e" class="field-wrapper">
@@ -194,43 +290,38 @@ $stmt->close();
           <h2 class="heading-style-h3">Reasons why our card is awesome</h2>
           <div class="why-lis-wrapper">
             <div class="why-list owl-carousel owl-theme">
-              <div class="why-card">
-                <div class="why-content-wrapper">
-                  <div class="heading-style-h5 overline bot-34">01</div>
-                  <h3 class="heading-style-h4 why-card-title">Never miss an opportunity to grow your network</h3>
-                  <div>Connect wherever you go. Your Eassave digital business card can be easily shared with anyone you meet even if they don’t have the app.</div>
-              </div>
-          </div>
-          <div class="why-card">
-            <div class="why-content-wrapper">
-              <div class="heading-style-h5 overline bot-34">02</div>
-              <h3 class="heading-style-h4 why-card-title">Make a great first impression</h3>
-              <div>Stand out with a digital business card. Eassave is COVID-safe, secure, environmentally friendly and a real talking point with customers.</div>
-          </div>
+
+                <!-- ---------------- -->
+
+                <?php
+// Select query for why_us table
+                $select_query = "SELECT id, count, title, short_description FROM why_us ORDER BY id ASC";
+                $result = $conn->query($select_query);
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    echo '<div class="why-card">';
+                    echo '  <div class="why-content-wrapper">';
+                    echo '    <div class="heading-style-h5 overline bot-34">' . htmlspecialchars($row['count']) . '</div>';
+                    echo '    <h3 class="heading-style-h4 why-card-title">' . htmlspecialchars($row['title']) . '</h3>';
+                    echo '    <div>' . htmlspecialchars($row['short_description']) . '</div>';
+                    echo '  </div>';
+                    echo '</div>';
+                }
+            } else {
+              echo "No records found.";
+          }
+
+
+
+          ?>
+
+
+          <!-- ---------------- -->
+
+
       </div>
-      <div class="why-card">
-        <div class="why-content-wrapper">
-          <div class="heading-style-h5 overline bot-34">03</div>
-          <h3 class="heading-style-h4 why-card-title">Be memorable</h3>
-          <div>When you receive a digital business card, Eassave automatically logs when and where you met your new contact. You can also add notes to your cards to record key customer details.</div>
-      </div>
   </div>
-  <div class="why-card">
-    <div class="why-content-wrapper">
-      <div class="heading-style-h5 overline bot-34">04</div>
-      <h3 class="heading-style-h4 why-card-title">Eco-Friendly</h3>
-      <div>orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-  </div>
-</div>
-<div class="why-card">
-    <div class="why-content-wrapper">
-      <div class="heading-style-h5 overline bot-34">05</div>
-      <h3 class="heading-style-h4 why-card-title">Affordable</h3>
-      <div>orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</div>
-  </div>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -242,9 +333,9 @@ $stmt->close();
           <div class="learn-content-wrapper">
             <h3>Do you have questions?  We got you covered.</h3>
             <div class="learn-excerpt">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</div>
-            <a href="../frequently-asked-questions.html" class="button is-secondary w-button">Learn more on our FAQ</a>
+            <a href="frequently-asked-questions.php" class="button is-secondary w-button">Learn more on our FAQ</a>
         </div>
-        <div class="plant-wrapper"><img src="../images/plant.png" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 40vw, 50vw" srcset="../images/plant-p-500.png 500w, ../images/plant.png 744w" alt="" class="plant"></div>
+        <div class="plant-wrapper"><img src="images/plant.png" loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 40vw, 50vw" srcset="../images/plant-p-500.png 500w, images/plant.png 744w" alt="" class="plant"></div>
     </div>
 </div>
 </div>
@@ -252,7 +343,7 @@ $stmt->close();
 
 
 <!-- Footer section -->
-    <?php include '../partials/footer-light.html'; ?>
+<?php include '../partials/footer-light.html'; ?>
 
 
 
@@ -297,19 +388,19 @@ $stmt->close();
        return;
    }
 }).owlCarousel({
-	items: 1,
-  nav: false,
-  dots: false,
-  loop: true,
-  autoHeight: false,
-  autoplay: true,
-  autoplayTimeout: 6000,
-  smartSpeed: 1000,
-  fluidSpeed: 1000,
-  autoplaySpeed: 1000,
-  navSpeed: 1000,
-  transitionStyle: 'linear',
-  responsive : {
+ items: 1,
+ nav: false,
+ dots: false,
+ loop: true,
+ autoHeight: false,
+ autoplay: true,
+ autoplayTimeout: 6000,
+ smartSpeed: 1000,
+ fluidSpeed: 1000,
+ autoplaySpeed: 1000,
+ navSpeed: 1000,
+ transitionStyle: 'linear',
+ responsive : {
   	// breakpoint from 0 up
     0 : {
       items:1,

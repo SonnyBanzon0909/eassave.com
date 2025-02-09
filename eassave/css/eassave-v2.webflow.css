@@ -8844,6 +8844,10 @@ figcaption {
   margin-top: 24px;
   margin-bottom: 24px;
 }
+.color-box.rounded {
+  border-radius: 100% !important;
+  overflow: hidden;
+}
 
 .details-name-wrapper {
   grid-column-gap: 30px;
@@ -8904,13 +8908,19 @@ figcaption {
   border-radius: 500px;
   justify-content: center;
   align-items: center;
-  min-width: 144px;
+  min-width: 100px;
   margin-bottom: 0;
   padding: 8px 16px;
   font-weight: 500;
   display: flex;
 }
 
+.dropdown-toggle div
+{
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
 
 
 .radio-btn-label {
