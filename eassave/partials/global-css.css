@@ -494,5 +494,16 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 100%;
   height: 50%;
 }
+.filter-list
+{
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
 
+@media screen and (max-width: 479px) {
+    #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d, #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d4f {
+        grid-area: span 1 / span 1 / span 1 / span 1;
+    }
+}
 </style>

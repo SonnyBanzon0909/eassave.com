@@ -114,12 +114,15 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                 <div class="shop-filter-title">Products</div>
                 <div class="link-wrapper">
                   <a href="#" class="link current">Cards</a>
-                  <a href="#" class="link">Customize your card</a>
+                  <a href="#" class="link" data-filter-type="finish" data-filter-value="All">Customize your card</a>
                   <a href="cards/card-scans.html" class="link">Card Scans</a>
                 </div>
+
+
                 <div class="search-filter">
                   <div class="shop-filter-title">Search Filter</div>
                   <div class="filter-container">
+
                     <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" class="dropdown search-dropdown w-dropdown">
                       <div class="dropdown-toggle search-toggle w-dropdown-toggle">
                         <div>Card Category</div>
@@ -128,31 +131,46 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                           <div class="bot-line"></div>
                         </div>
                       </div>
+                      
                       <nav class="dropdown-list relative-list w-dropdown-list">
-                        <div class="dropdown-wrapper">
-                          <div class="w-richtext">
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                          </div>
+                        <div class="dropdown-wrapper filter-list">
+
+                          <a href="#" class="link" data-filter-type="category" data-filter-value="All">All</a>
+                          <a href="#" class="link" data-filter-type="category" data-filter-value="Category 1">Category 1</a>
+                          <a href="#" class="link" data-filter-type="category" data-filter-value="Category 2">Category 2</a>
+                          <a href="#" class="link" data-filter-type="category" data-filter-value="Category 3">Category 3</a>
+
+
+                          
                         </div>
                       </nav>
                     </div>
-                    <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806af" class="dropdown search-dropdown w-dropdown">
+
+
+                    <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" class="dropdown search-dropdown w-dropdown">
                       <div class="dropdown-toggle search-toggle w-dropdown-toggle">
-                        <div>Card Materials</div>
+                        <div>Card Material</div>
                         <div class="accordion-wrapper">
                           <div class="top-line"></div>
                           <div class="bot-line"></div>
                         </div>
                       </div>
                       <nav class="dropdown-list relative-list w-dropdown-list">
-                        <div class="dropdown-wrapper">
-                          <div class="w-richtext">
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                          </div>
+                        <div class="dropdown-wrapper filter-list">
+
+                          <a href="#" class="link" data-filter-type="material" data-filter-value="All" >All</a>
+                          <a href="#" class="link" data-filter-type="material" data-filter-value="Plastic" >Plastic</a>
+                          <a href="#" class="link" data-filter-type="material" data-filter-value="Metal" >Metal</a>
+                          <a href="#" class="link" data-filter-type="material" data-filter-value="Acrylic" >Acrylic</a>
+                          <a href="#" class="link" data-filter-type="material" data-filter-value="Wood" >Wood</a>
+                          <a href="#" class="link" data-filter-type="material" data-filter-value="Leather" >Leather</a>
+
+                          
                         </div>
                       </nav>
                     </div>
-                    <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806bb" class="dropdown search-dropdown w-dropdown">
+
+                    <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" class="dropdown search-dropdown w-dropdown">
                       <div class="dropdown-toggle search-toggle w-dropdown-toggle">
                         <div>Card Finish</div>
                         <div class="accordion-wrapper">
@@ -161,29 +179,42 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                         </div>
                       </div>
                       <nav class="dropdown-list relative-list w-dropdown-list">
-                        <div class="dropdown-wrapper">
-                          <div class="w-richtext">
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                          </div>
+                        <div class="dropdown-wrapper filter-list">
+
+                          <a href="#" class="link" data-filter-type="finish" data-filter-value="All">All</a>
+                          <a href="#" class="link" data-filter-type="finish" data-filter-value="Glossy">Glossy</a>
+                          <a href="#" class="link" data-filter-type="finish" data-filter-value="Matte">Matte</a>
+                          <a href="#" class="link" data-filter-type="finish" data-filter-value="Satin">Satin</a>
+
+
+                          
                         </div>
                       </nav>
                     </div>
-                    <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806c7" class="dropdown search-dropdown w-dropdown">
+
+
+                    <div data-hover="false" data-delay="500" data-w-id="7c32500e-b8cd-bff2-a5b2-8f145d3806a3" class="dropdown search-dropdown w-dropdown">
                       <div class="dropdown-toggle search-toggle w-dropdown-toggle">
-                        <div>Orientation</div>
+                        <div>Card Orientation</div>
                         <div class="accordion-wrapper">
                           <div class="top-line"></div>
                           <div class="bot-line"></div>
                         </div>
                       </div>
                       <nav class="dropdown-list relative-list w-dropdown-list">
-                        <div class="dropdown-wrapper">
-                          <div class="w-richtext">
-                            <p>The rich text element allows you to create and format headings, paragraphs, blockquotes, images, and video all in one place instead of having to add and format them individually. Just double-click and easily create content.</p>
-                          </div>
+                        <div class="dropdown-wrapper filter-list">
+
+                          <a href="#" class="link" data-filter-type="orientation" data-filter-value="All">All</a>
+                          <a href="#" class="link" data-filter-type="orientation" data-filter-value="Portrait">Portrait</a>
+                          <a href="#" class="link" data-filter-type="orientation" data-filter-value="Landscape">Landscape</a>
+
+
+
+                          
                         </div>
                       </nav>
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -273,7 +304,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
                   <?php
 // Select query for the shop table to fetch items
-                  $select_query = "SELECT id, name, type, colors, is_solid_color, patterns, price, link,popularity,sales,rating,created_at FROM shop ORDER BY popularity DESC";
+                  $select_query = "SELECT id, name, type, colors, is_solid_color, patterns, price, link,category,material,finish, orientation,popularity,sales,rating,created_at FROM shop ORDER BY popularity DESC";
                   $result = $conn->query($select_query);
 
                   if ($result->num_rows > 0) {
@@ -284,7 +315,15 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $patterns = $row['patterns'] ? explode(',', $row['patterns']) : [];
 
         // Display each item in a card
-                      echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block" data-popularity="' . htmlspecialchars($row['popularity']) . '" data-sales="' . htmlspecialchars($row['sales']) . '" data-rating="' . htmlspecialchars($row['rating']) . '" data-created="' . htmlspecialchars($row['created_at']) . '">';
+                      echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block" 
+                      data-category="' . htmlspecialchars($row['category']) . '" 
+                      data-material="' . htmlspecialchars($row['material']) . '" 
+                      data-finish="' . htmlspecialchars($row['finish']) . '" 
+                      data-orientation="' . htmlspecialchars($row['orientation']) . '" 
+                      data-popularity="' . htmlspecialchars($row['popularity']) . '" 
+                      data-sales="' . htmlspecialchars($row['sales']) . '" 
+                      data-rating="' . htmlspecialchars($row['rating']) . '" 
+                      data-created="' . htmlspecialchars($row['created_at']) . '">';
 
                       echo '  <div class="shop-img-wrapper"><img src="images/Card-Blue.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 35vw, (max-width: 991px) 16vw, 18vw" srcset="images/Card-Blue-p-500.png 500w, images/Card-Blue.png 934w" alt=""></div>';
                       echo '  <div class="color-wrapper">';
@@ -383,21 +422,21 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
     // Sort the array based on the selected option
     let sortedCards;
     switch (sortOption) {
-        case 'Most Popular':
-            sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-popularity') - a.getAttribute('data-popularity'));
-            break;
-        case 'Best Selling':
-            sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-sales') - a.getAttribute('data-sales'));
-            break;
-        case 'Highest Rated':
-            sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-rating') - a.getAttribute('data-rating'));
-            break;
-        case 'Newest Arrivals':
-            sortedCards = cardsArray.sort((a, b) => new Date(b.getAttribute('data-created')) - new Date(a.getAttribute('data-created')));
-            break;
-        default:
-            sortedCards = cardsArray;
-            break;
+    case 'Most Popular':
+      sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-popularity') - a.getAttribute('data-popularity'));
+      break;
+    case 'Best Selling':
+      sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-sales') - a.getAttribute('data-sales'));
+      break;
+    case 'Highest Rated':
+      sortedCards = cardsArray.sort((a, b) => b.getAttribute('data-rating') - a.getAttribute('data-rating'));
+      break;
+    case 'Newest Arrivals':
+      sortedCards = cardsArray.sort((a, b) => new Date(b.getAttribute('data-created')) - new Date(a.getAttribute('data-created')));
+      break;
+    default:
+      sortedCards = cardsArray;
+      break;
     }
 
     // Remove all the cards and append the sorted ones
@@ -405,6 +444,66 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
     shopCardsContainer.innerHTML = '';  // Clear current shop cards
     sortedCards.forEach(card => {
         shopCardsContainer.appendChild(card);  // Append each sorted card
+      });
+  });
+
+
+
+// Store the selected filter values in an object
+let selectedFilters = {
+    category: 'All',
+    material: 'All',
+    finish: 'All',
+    orientation: 'All'
+};
+
+// Function to filter shop cards
+function filterShopCards() {
+    const cards = document.querySelectorAll('.shop-card');
+    
+    cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        const cardMaterial = card.getAttribute('data-material');
+        const cardFinish = card.getAttribute('data-finish');
+        const cardOrientation = card.getAttribute('data-orientation');
+
+        // Check if the card matches all selected filters
+        const matchesCategory = (selectedFilters.category === 'All' || cardCategory === selectedFilters.category);
+        const matchesMaterial = (selectedFilters.material === 'All' || cardMaterial === selectedFilters.material);
+        const matchesFinish = (selectedFilters.finish === 'All' || cardFinish === selectedFilters.finish);
+        const matchesOrientation = (selectedFilters.orientation === 'All' || cardOrientation === selectedFilters.orientation);
+
+        // If the card matches all filters, show it, else hide it
+        if (matchesCategory && matchesMaterial && matchesFinish && matchesOrientation) {
+            card.style.display = '';  // Show the card
+        } else {
+            card.style.display = 'none';  // Hide the card
+        }
+    });
+}
+
+// Add event listeners to the dropdown links
+const filterLinks = document.querySelectorAll('.filter-list .link');
+filterLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();  // Prevent the default link behavior
+
+        const filterType = this.getAttribute('data-filter-type');
+        const filterValue = this.getAttribute('data-filter-value');
+
+        // Update the selected filter
+        selectedFilters[filterType] = filterValue;
+
+        // Remove 'current' class from all links within the same filter list container
+        const filterList = this.closest('.filter-list');
+        const allLinksInList = filterList.querySelectorAll('.link');
+        allLinksInList.forEach(item => item.classList.remove('current'));
+
+        // Add 'current' class to the clicked link
+        this.classList.add('current');
+
+        // Call the filter function to update the shop cards
+        filterShopCards();
     });
 });
 

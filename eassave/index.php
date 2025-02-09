@@ -64,7 +64,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   <div class="page-wrapper">
     <div class="global-styles w-embed">
 
-     <!-- Navigation -->
+     <!-- Custom CSS -->
      <?php include 'partials/global-css.css'; ?>
 
    </div>
