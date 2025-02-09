@@ -311,7 +311,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
                   <?php
 // Select query for the shop table to fetch items
-                  $select_query = "SELECT id, name, type, colors, is_solid_color, patterns, price, link,category,material,finish, orientation,popularity,sales,rating,created_at FROM shop ORDER BY popularity DESC";
+                  $select_query = "SELECT id, name, slug, type, colors, is_solid_color, patterns, price, link,category,material,finish, orientation,popularity,sales,rating,created_at FROM shop ORDER BY popularity DESC";
                   $result = $conn->query($select_query);
 
                   if ($result->num_rows > 0) {
@@ -322,7 +322,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       $patterns = $row['patterns'] ? explode(',', $row['patterns']) : [];
 
         // Display each item in a card
-                      echo '<a href="' . htmlspecialchars($row['link']) . '" class="shop-card w-inline-block" 
+                      echo '<a href="' . htmlspecialchars($row['link']). '?slug='. htmlspecialchars($row['slug']) . '" class="shop-card w-inline-block" 
                       data-type="cards" 
                       data-category="' . htmlspecialchars($row['category']) . '" 
                       data-material="' . htmlspecialchars($row['material']) . '" 

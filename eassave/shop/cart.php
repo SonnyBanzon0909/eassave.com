@@ -32,8 +32,31 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 }
 
 
-?>
 
+// Check if a slug is provided in the URL
+if (!isset($_GET['slug']) || empty($_GET['slug'])) {
+    header("Location: shop.php"); // Redirect to an error page if no slug is found
+    exit();
+}
+
+$slug = $_GET['slug'];
+
+// Use prepared statements to prevent SQL Injection
+$stmt = $conn->prepare("SELECT * FROM shop WHERE slug = ?");
+$stmt->bind_param("s", $slug);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows == 0) {
+    header("Location: ../404.html"); // Redirect if slug doesn't exist
+    exit();
+}
+
+$product = $result->fetch_assoc(); // Fetch product details
+
+$stmt->close();
+ 
+?>
 
 <!DOCTYPE html><!--  Last Published: Fri Oct 11 2024 08:14:06 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="665f147b743ba95cae446d57" data-wf-site="665f147b743ba95cae446cfe">
