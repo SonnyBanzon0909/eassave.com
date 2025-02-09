@@ -173,6 +173,9 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 </div>
 </div>
 </div>
+
+sdsdsds
+
 </label><label class="w-checkbox cart-item">
   <div class="w-checkbox-input w-checkbox-input--inputType-custom checkbox green-check cart-item-check"></div><input type="checkbox" name="All-Check-2" data-name="All Check 2" style="opacity:0;position:absolute;z-index:-1">
   <div class="cart-details-wrapper">
