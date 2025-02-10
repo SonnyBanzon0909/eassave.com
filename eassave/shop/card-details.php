@@ -276,9 +276,15 @@ $stmt->close();
 
       <div class="line-separator"></div>
       <div class="details-form-grid">
+
         <div id="w-node-_9679e5f6-ffcb-a435-7b22-1bd3a0a144a8-0faf136e" class="field-wrapper">
-          <div class="placeholder-wrapper"><label for="Email-5" class="text-size-small">Full Name <span class="asterisk">*</span></label><label for="Email-5" class="text-size-small placeholder">30 Character Left</label></div><input class="text-field w-input" maxlength="256" name="name" data-name="name" placeholder="" type="text" id="name" required="">
+          
+          <div class="placeholder-wrapper">
+            <label for="Email-5" class="text-size-small">Full Name <span class="asterisk">*</span></label>
+            <label for="" class="text-size-small placeholder" id="char-count">30 Character Left</label></div>
+            <input class="text-field w-input" maxlength="30" name="name" data-name="name" placeholder="" type="text" id="name" required="">
         </div>
+
         <div id="w-node-_9679e5f6-ffcb-a435-7b22-1bd3a0a144ae-0faf136e" class="field-wrapper"><label for="job-title" class="text-size-small label">Job Title <span class="asterisk">*</span></label><input class="text-field w-input" maxlength="256" name="job-title" data-name="job-title" placeholder="" type="text" id="job-title" required=""></div>
         <div id="w-node-_268b4270-9011-09a6-6039-7c2a5a53dd6f-0faf136e" class="btn-container">
           <div id="w-node-_08170c51-eece-ea57-4195-1d0fce1285fd-0faf136e" data-w-id="08170c51-eece-ea57-4195-1d0fce1285fd" class="button is-icon max-button-width">
@@ -392,6 +398,20 @@ $stmt->close();
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!--  Initialize Swiper  -->
 <script>
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const inputField = document.getElementById("name");
+    const charCountLabel = document.getElementById("char-count");
+    const maxLength = 30; // Set the character limit
+
+    inputField.addEventListener("input", function () {
+        const remainingChars = maxLength - inputField.value.length;
+        charCountLabel.textContent = `${remainingChars} Character${remainingChars === 1 ? '' : 's'} Left`;
+    });
+});
+
+
   var swiper = new Swiper(".slider-selector", {
     spaceBetween: 10,
     slidesPerView: 4,
