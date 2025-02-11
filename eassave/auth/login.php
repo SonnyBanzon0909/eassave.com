@@ -2,13 +2,13 @@
 <?php
 
 $_SESSION['is_login'] = false;
- 
+
 
 
 $root = $_SERVER['DOCUMENT_ROOT'];
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 
@@ -22,8 +22,8 @@ include '../../private/login-session.php';
 
 // Redirect to /login if the user is not logged in
 if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
-    $_SESSION['is_login']= false;
-     
+  $_SESSION['is_login']= false;
+
 }
 
 ?>
@@ -185,57 +185,88 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
+  document.addEventListener("DOMContentLoaded", async function () {
+    try {
+        // Create a FormData object (if needed)
+        let formData = new FormData(); // Only if you need to send form data
+
+        // Make the fetch request
+        const response = await fetch("../private/auth/otp-verify-code.php", {
+            method: "POST", // Ensure it's a POST request
+            body: formData
+          });
+
+        // Wait for the response to be parsed as JSON
+        const result = await response.json();
+
+        // Check for success
+        if (result.message === "success") {
+          alert("SUCCESS!!!!");
+        } else {
+            // Show any error message
+          alert("OTP verification failed!");
+
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
 
 
- document.getElementById("wf-form-Login-Form").addEventListener("submit", async function(e) {
-  e.preventDefault();
+
+
+
+
+  document.getElementById("wf-form-Login-Form").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
   // Create a FormData object to gather the form data
-  const formData = new FormData(this);
+    const formData = new FormData(this);
 
   // Make the fetch request
-  const response = await fetch("../private/auth/login-code.php", {
+    const response = await fetch("../private/auth/login-code.php", {
     method: "POST",  // Make sure it's POST, not GET
     body: formData
   });
 
   // Wait for the response to be parsed as JSON
-  const result = await response.json();
+    const result = await response.json();
 
   // Check for success
-  if (result.message === "success") {
+    if (result.message === "success") {
     // Redirect to OTP page on successful login
-    window.location.href = "index.php";
-  } else {
+      window.location.href = "index.php";
+    } else {
     // Show any error message
-    alert("Email or password didn't match.");
-  }
-});
+      alert("Email or password didn't match.");
+    }
+  });
 
 
 
 
 
 // Get the password fields and their corresponding toggle icons
- const togglePassword = document.getElementById('togglePassword');
- const passwordField = document.getElementById('Password');
- const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
- const confirmPasswordField = document.getElementById('Confirm-Password');
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordField = document.getElementById('Password');
+  const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+  const confirmPasswordField = document.getElementById('Confirm-Password');
 
 // Function to toggle password visibility
- function toggleVisibility(inputField, toggleIcon) {
-  const type = inputField.type === 'password' ? 'text' : 'password';
-  inputField.type = type;
+  function toggleVisibility(inputField, toggleIcon) {
+    const type = inputField.type === 'password' ? 'text' : 'password';
+    inputField.type = type;
 
   // Toggle the icon based on visibility
-  const icon = type === 'password' ? 'eye-slash.svg' : 'eye.svg';
-  toggleIcon.src = `.../../images/${icon}`;
-}
+    const icon = type === 'password' ? 'eye-slash.svg' : 'eye.svg';
+    toggleIcon.src = `.../../images/${icon}`;
+  }
 
 // Add event listeners to toggle icons
-togglePassword.addEventListener('click', function () {
-  toggleVisibility(passwordField, togglePassword);
-});
+  togglePassword.addEventListener('click', function () {
+    toggleVisibility(passwordField, togglePassword);
+  });
 
 
 

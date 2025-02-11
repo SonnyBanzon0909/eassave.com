@@ -105,16 +105,16 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
         <form id="otp-form" name="otp-form" data-name="Login Form" method="POST" action="../private/auth/otp-verify-code.php" data-wf-page-id="66c1d4d1c4e6e89fe3a519d0" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
           <h1 class="heading-style-h5">Verify Email Address 📱</h1>
-          <div class="form-excerpt">You will get a OTP via Email</div>
+          <div class="form-excerpt">You will get an OTP via Email</div>
           <div class="login-grid bot-none">
-            <div class="otp-wrapper"><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp2')" maxlength="1" name="otp-1" data-name="otp-1" placeholder="0" type="number" id="otp1" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp3')" maxlength="1" name="otp2" data-name="otp-2" placeholder="0" type="number" id="otp2" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp4')" maxlength="1" name="otp-3" data-name="otp-3" placeholder="0" type="number" id="otp3" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp5')" maxlength="1" name="otp-4" data-name="otp-4" placeholder="0" type="number" id="otp4" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp6')" maxlength="1" name="otp-5" data-name="otp-5" placeholder="0" type="number" id="otp5" required=""><input class="text-field transparent-text-field otp-field w-input" maxlength="1" name="otp-6" data-name="otp-6" placeholder="0" type="number" id="otp6" required=""></div>
-            <a data-w-id="6781a2ad-69e0-0135-a3da-b0405a444638" href="auth/login.php" class="button is-icon max-button-width w-inline-block">
-              <div class="btn-text">Verify OTP and Login</div>
+            <div class="otp-wrapper"><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp2')" maxlength="1" name="otp-1" data-name="otp-1" placeholder="0" type="number" id="otp1" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp3')" maxlength="1" name="otp-2" data-name="otp-2" placeholder="0" type="number" id="otp2" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp4')" maxlength="1" name="otp-3" data-name="otp-3" placeholder="0" type="number" id="otp3" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp5')" maxlength="1" name="otp-4" data-name="otp-4" placeholder="0" type="number" id="otp4" required=""><input class="text-field transparent-text-field otp-field w-input" oninput="moveFocus(this, 'otp6')" maxlength="1" name="otp-5" data-name="otp-5" placeholder="0" type="number" id="otp5" required=""><input class="text-field transparent-text-field otp-field w-input" maxlength="1" name="otp-6" data-name="otp-6" placeholder="0" type="number" id="otp6" required=""></div>
+            <div data-w-id="6781a2ad-69e0-0135-a3da-b0405a444638" class="button is-icon max-button-width w-inline-block">
+              <div class="btn-text pointer-events-off">Verify OTP and Login</div>
               <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
               </svg></div>
               <div class="button-overlay pointer-events-off"></div><input type="submit" data-wait="" class="submit-btn w-button" value="">
-            </a>
+            </div>
           </div>
           <div class="google-wrapper">
             <div class="register-wrapper top-16">
@@ -162,6 +162,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                   <!-- Placeholder for success/error messages -->
                   <div id="email-message" class="error-text-message">Email is already registered.</div> 
 
+                  <div class="sub-label">We will send you a One Time Code on your Email Address</div>
+
                 </div>
                 <div class="field-wrapper">
                   <input class="text-field transparent-text-field w-input phone-field" maxlength="256" name="phone" id="Phone" placeholder="Phone" type="tel" required>
@@ -173,7 +175,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
-                  <div class="sub-label">We will send you a One Time Code on your phone number</div>
+                  <!-- <div class="sub-label">We will send you a One Time Code on your phone number</div> -->
                 </div>
                 <div class="field-wrapper icon-field-wrapper">
                   <input class="text-field transparent-text-field w-input password-field" maxlength="256" name="password" id="Password" placeholder="Password" type="password" required>
@@ -290,6 +292,33 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
+//OTP Verification
+
+document.getElementById("otp-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    let formData = new FormData(this);
+
+    fetch(this.action, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === "success") {
+            alert("OTP Verified! Redirecting...");
+            window.location.href = "index.php"; // Change to your desired page
+        } else {
+            alert("Invalid OTP. Please try again.");
+        }
+        alert(data.message);
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+
+
+//Registration
 
   document.getElementById("wf-form-Login-Form").addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -321,27 +350,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       $(".otp-section-wrapper").css("display", "flex");
       document.querySelector("form").reset();
 
-
-// // // Create FormData
-//       const formData = new FormData();
-      
-
-// // Call send-otp.php after successful registration
-//       const otpResponse = await fetch("../private/auth/send-otp.php", {
-//         method: "POST",
-//         body: formData
-//       });
-
-//       const otpResult = await otpResponse.json();
-
-//       if (otpResult.message === "success") {
-//   // Show OTP section
-//         // $(".otp-section-wrapper").css("display", "flex");
-//         // document.querySelector("form").reset();
-//       } else {
-//         console.error("OTP sending failed:", otpResult.error);
-//       }
-
+ 
 
 
 
