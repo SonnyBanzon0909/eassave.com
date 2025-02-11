@@ -111,7 +111,38 @@ $stmt->close();
               <div class="bread-crumbs-container">
                 <a href="#" class="breadcrumbs">Home</a><img src="images/bi_chevron-down.svg" loading="lazy" alt="">
                 <a href="../shop.html" class="breadcrumbs">Shop</a><img src="images/bi_chevron-down.svg" loading="lazy" alt="">
-                <a href="../shop.html" class="breadcrumbs">Product Name</a>
+
+
+                <!-- ----------------- -->
+
+                <?php
+
+
+                $select_query = "SELECT * FROM shop WHERE slug = ?";
+                $stmt = $conn->prepare($select_query);
+                $stmt->bind_param("s", $slug);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+
+
+                    echo '<a href="../shop.html" class="breadcrumbs">'. htmlspecialchars($row['name']). '</a>';
+                  }
+                }
+                else 
+                {
+                  echo "No products found.";
+                }
+
+    // Close the statement
+                $stmt->close();
+
+                ?>
+
+
+                <!-- ----------------- -->
               </div>
             </div>
             <div class="card-details-grid">
@@ -278,38 +309,38 @@ $stmt->close();
       <div class="details-form-grid">
 
         <div id="w-node-_9679e5f6-ffcb-a435-7b22-1bd3a0a144a8-0faf136e" class="field-wrapper">
-          
+
           <div class="placeholder-wrapper">
             <label for="Email-5" class="text-size-small">Full Name <span class="asterisk">*</span></label>
             <label for="" class="text-size-small placeholder" id="char-count">30 Character Left</label></div>
             <input class="text-field w-input" maxlength="30" name="name" data-name="name" placeholder="" type="text" id="name" required="">
-        </div>
+          </div>
 
-        <div id="w-node-_9679e5f6-ffcb-a435-7b22-1bd3a0a144ae-0faf136e" class="field-wrapper"><label for="job-title" class="text-size-small label">Job Title <span class="asterisk">*</span></label><input class="text-field w-input" maxlength="256" name="job-title" data-name="job-title" placeholder="" type="text" id="job-title" required=""></div>
-        <div id="w-node-_268b4270-9011-09a6-6039-7c2a5a53dd6f-0faf136e" class="btn-container">
-          <div id="w-node-_08170c51-eece-ea57-4195-1d0fce1285fd-0faf136e" data-w-id="08170c51-eece-ea57-4195-1d0fce1285fd" class="button is-icon max-button-width">
-            <div class="btn-text">Add to Cart</div>
-            <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
-            </svg></div>
-            <div class="button-overlay pointer-events-off"></div><input type="submit" data-wait="" class="submit-btn w-button" value="">
+          <div id="w-node-_9679e5f6-ffcb-a435-7b22-1bd3a0a144ae-0faf136e" class="field-wrapper"><label for="job-title" class="text-size-small label">Job Title <span class="asterisk">*</span></label><input class="text-field w-input" maxlength="256" name="job-title" data-name="job-title" placeholder="" type="text" id="job-title" required=""></div>
+          <div id="w-node-_268b4270-9011-09a6-6039-7c2a5a53dd6f-0faf136e" class="btn-container">
+            <div id="w-node-_08170c51-eece-ea57-4195-1d0fce1285fd-0faf136e" data-w-id="08170c51-eece-ea57-4195-1d0fce1285fd" class="button is-icon max-button-width">
+              <div class="btn-text">Add to Cart</div>
+              <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
+              </svg></div>
+              <div class="button-overlay pointer-events-off"></div><input type="submit" data-wait="" class="submit-btn w-button" value="">
+            </div>
           </div>
         </div>
+      </form>
+      <div class="w-form-done">
+        <div>Thank you! Your submission has been received!</div>
       </div>
-    </form>
-    <div class="w-form-done">
-      <div>Thank you! Your submission has been received!</div>
+      <div class="w-form-fail">
+        <div>Oops! Something went wrong while submitting the form.</div>
+      </div>
     </div>
-    <div class="w-form-fail">
-      <div>Oops! Something went wrong while submitting the form.</div>
+    <div class="line-separator"></div>
+    <div class="details-content-con">
+      <div class="addition-title-text">Additional Details</div>
+      <div>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</div>
     </div>
   </div>
-  <div class="line-separator"></div>
-  <div class="details-content-con">
-    <div class="addition-title-text">Additional Details</div>
-    <div>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</div>
-  </div>
-</div>
 </div>
 </div>
 </div>
@@ -406,10 +437,10 @@ $stmt->close();
     const maxLength = 30; // Set the character limit
 
     inputField.addEventListener("input", function () {
-        const remainingChars = maxLength - inputField.value.length;
-        charCountLabel.textContent = `${remainingChars} Character${remainingChars === 1 ? '' : 's'} Left`;
+      const remainingChars = maxLength - inputField.value.length;
+      charCountLabel.textContent = `${remainingChars} Character${remainingChars === 1 ? '' : 's'} Left`;
     });
-});
+  });
 
 
   var swiper = new Swiper(".slider-selector", {
