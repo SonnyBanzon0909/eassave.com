@@ -1,9 +1,9 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'];
 
-// Start the session
+// Start session (Best practice: place it at the top)
 if (session_status() === PHP_SESSION_NONE) {
-  session_start();
+    session_start();
 }
 
 // Example: Database connection
@@ -35,7 +35,7 @@ function registerUser($email, $phone, $password, $confirmPassword, $termsAccepte
     $phone = trim(filter_var($phone, FILTER_SANITIZE_NUMBER_INT));
     $password = trim($password);
     $confirmPassword = trim($confirmPassword);
-    $termsAccepted = $termsAccepted ? 1 : 0; // Convert terms to a boolean (1 for accepted, 0 for not)
+    $termsAccepted = $termsAccepted ? 1 : 0; // Convert terms to 1/0
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return "invalid-email";
@@ -67,12 +67,26 @@ function registerUser($email, $phone, $password, $confirmPassword, $termsAccepte
     }
     $stmt->close();
 
-    // Insert user into the database, including the terms acceptance
-    $stmt = $conn->prepare("INSERT INTO users (email, phone, password_hash, terms_accepted) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $email, $phone, $hashedPassword, $termsAccepted);
+    // Set timezone and generate OTP
+    date_default_timezone_set('Asia/Manila');
+
+    // Get current time and add 5 minutes
+    $expiration_time = date("Y-m-d H:i:s", strtotime("+5 minutes"));
+
+    // Generate OTP
+    $otp = mt_rand(100000, 999999);
+
+    // Insert user into the database
+    $stmt = $conn->prepare("INSERT INTO users (email, phone, password_hash, terms_accepted, otp, otp_expiration) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssiis", $email, $phone, $hashedPassword, $termsAccepted, $otp, $expiration_time);
 
     if ($stmt->execute()) {
         $stmt->close();
+
+        // Store email & OTP in session
+        $_SESSION['email'] = $email;
+        $_SESSION['otp'] = $otp;
+
         return "success";
     } else {
         $error = $stmt->error;
@@ -88,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"] ?? '';
     $confirmPassword = $_POST["confirm-password"] ?? '';
     $csrfToken = $_POST["csrf_token"] ?? '';
-    $terms = isset($_POST["terms"]) ? $_POST["terms"] : ''; // Get the terms checkbox value
+    $terms = isset($_POST["terms"]) ? $_POST["terms"] : ''; // Get terms checkbox value
 
     // Validate CSRF token
     if (!isValidCsrfToken($csrfToken)) {
@@ -97,8 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     $message = registerUser($email, $phone, $password, $confirmPassword, $terms);
-    echo json_encode(["message" => $message]);
-    exit; // End the script to prevent further output
-}
 
+    // ✅ Send OTP only if registration is successful
+    if ($message === "success") {
+        include 'send-otp.php';
+    }
+
+    echo json_encode(["message" => $message]);
+    exit; // End script
+}
 ?>

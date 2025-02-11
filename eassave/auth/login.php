@@ -205,10 +205,10 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   // Check for success
   if (result.message === "success") {
     // Redirect to OTP page on successful login
-    window.location.href = "../eassave";
+    window.location.href = "index.php";
   } else {
     // Show any error message
-    alert(result.message);
+    alert("Email or password didn't match.");
   }
 });
 
