@@ -103,7 +103,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
         </div> -->
 
 
-        <form id="otp-form" name="otp-form" data-name="Login Form" method="get" data-wf-page-id="66c1d4d1c4e6e89fe3a519d0" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
+        <form id="otp-form" name="otp-form" data-name="Login Form" method="POST" action="../private/auth/register-code.php" data-wf-page-id="66c1d4d1c4e6e89fe3a519d0" data-wf-element-id="6781a2ad-69e0-0135-a3da-b0405a444612">
           <h1 class="heading-style-h5">Verify Email Address 📱</h1>
           <div class="form-excerpt">You will get a OTP via Email</div>
           <div class="login-grid bot-none">
@@ -289,6 +289,34 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   });
 
 
+//////////////////////////////
+
+
+
+  // document.getElementById("otp-form").addEventListener("submit", async function(e) {
+  //   e.preventDefault();
+
+  //   const formData = new FormData(this);
+
+  //   const response = await fetch("../private/auth/send-otp.php", {
+  //     method: "POST",
+  //     body: formData
+  //   });
+
+  //   const result = await response.json();
+  //   alert(result.message);
+  // // Control visibility based on result status
+  //   if (result.message === "success") {
+
+  //     window.location.href = "login.php";
+
+  //   } else {
+
+
+  //   }
+  // });
+
+//////////////////////////////
 
 
   document.getElementById("wf-form-Login-Form").addEventListener("submit", async function(e) {
@@ -318,12 +346,30 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   // Control visibility based on result status
     if (result.message === "success") {
 
-     // Redirect to login.php after success
-      ///window.location.href = ".../../auth/otp.php";
 
-      $(".otp-section-wrapper").css("display", "flex");
-      this.reset();
-    } else {
+// Call send-otp.php after successful registration
+      const otpResponse = await fetch("../private/auth/send-otp.php", {
+        method: "POST",
+        body: formData
+      });
+
+      const otpResult = await otpResponse.json();
+
+      if (otpResult.message === "success") {
+      // Show OTP section
+        $(".otp-section-wrapper").css("display", "flex");
+        this.reset();
+      } else {
+        console.error("OTP sending failed:", otpResult.message);
+      }
+
+
+
+
+
+    } 
+    else 
+    {
     // Show specific messages
       switch (result.message) {
       case "invalid-email":

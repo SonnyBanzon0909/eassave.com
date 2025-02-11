@@ -3,7 +3,8 @@
 // For OTP, creation ensure to meet the ff:
 //1. Gmail Account is set to have 2 auth password
 //2. Generate a 12 charaction app password from this gmail site: https://myaccount.google.com/u/7/apppasswords?rapt=AEjHL4NkK1lPpJvqCtjJeanzYXIBwEL8hCULchiN9GOA3Gmhl8E7mzlrgj3TPHksKj42amTXPMNKJUiycYzefPA1UD8WhqgucsA7EblgKCcY0rx40qrPsBA
-
+//3. Reuse this code
+//4. for debugging purpose, set this to 2, instead of zero $mail->SMTPDebug = 2;
 
 $root = $_SERVER['DOCUMENT_ROOT'];
 
@@ -39,7 +40,7 @@ try {
     $mail->Port = 587;
     
     // Remove debug mode in production
-    $mail->SMTPDebug = 2;
+    $mail->SMTPDebug = 0;
 
     $mail->SMTPOptions = array(
     'ssl' => array(
@@ -74,9 +75,11 @@ try {
     // Send Email
     $mail->send();
     
-    echo '<script>alert("Message has been sent! \nNote: If you did not receive this email, please check your spam folder.");</script>';
+    echo json_encode(["message" => "success"]);
+    //echo '<script>alert("Message has been sent! \nNote: If you did not receive this email, please check your spam folder.");</script>';
     
 } catch (Exception $e) {
-    echo "Message could not be sent. Error: {$mail->ErrorInfo}";
+    echo json_encode(["message" => "error"]);
+    ///echo "Message could not be sent. Error: {$mail->ErrorInfo}";
 }
 ?>
