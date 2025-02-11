@@ -25,11 +25,7 @@ if ($conn->connect_error) {
 
 
 
-// Redirect to /login if the user is not logged in
-if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
-  header("Location: .../../auth/login.php");
-  exit();
-}
+ 
 
 
 ?>

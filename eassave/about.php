@@ -237,7 +237,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
-            </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon"></div>
+            </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon pointer-events-off"></div>
             
             <div class="select-wrapper"><select id="Country" name="Country" data-name="Country" class="select w-select">
               <option value="">Country</option>
@@ -259,7 +259,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
               ?>
 
               <!-- ---------- -->
-            </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon"></div>
+            </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon pointer-events-off"></div>
 
           </form>
 
