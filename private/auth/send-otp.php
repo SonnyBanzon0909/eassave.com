@@ -4,7 +4,7 @@
 //1. Gmail Account is set to have 2 auth password
 //2. Generate a 12 charaction app password from this gmail site: https://myaccount.google.com/u/7/apppasswords?rapt=AEjHL4NkK1lPpJvqCtjJeanzYXIBwEL8hCULchiN9GOA3Gmhl8E7mzlrgj3TPHksKj42amTXPMNKJUiycYzefPA1UD8WhqgucsA7EblgKCcY0rx40qrPsBA
 
- 
+
 $root = $_SERVER['DOCUMENT_ROOT'];
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -14,7 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Set timezone and generate OTP
 date_default_timezone_set('Asia/Manila');
 $date_time = date("Y-m-d H:i:s A"); // 24-hour format
-$otp = mt_rand(1000, 9999);
+$otp = mt_rand(100000, 999999);
 
 $_SESSION['date_time'] = $date_time;
 $_SESSION['otp'] = $otp;
@@ -34,12 +34,23 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'noreply.eassave@gmail.com';  // Your Gmail username
-    $mail->Password = 'lcgr qmtq kxji lysq';  // Use App Password instead of real password
+    $mail->Password = 'lcgrqmtqkxjilysq';  // Use App Password instead of real password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
     
     // Remove debug mode in production
     $mail->SMTPDebug = 2;
+
+    $mail->SMTPOptions = array(
+    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    )
+);
+
+
+
 
     // Email Recipients
     $mail->setFrom("noreply.eassave@gmail.com", 'Eassave');
@@ -56,8 +67,7 @@ try {
         This OTP is valid for 5 minutes and can only be used once.<br><br>
         If you did not request this OTP, please ignore this email.<br><br>
         Best regards,<br>
-        Admin<br>
-        Parokya ni San Gregorio Magno
+        Eassave & Protech Innovation Group
     ";
     $mail->AltBody = "Your OTP is: $otp. This OTP is valid for 5 minutes.";
 
