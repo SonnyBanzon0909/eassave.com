@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 
 
 
- 
+
 
 
 ?>
@@ -82,12 +82,74 @@ if ($conn->connect_error) {
           <div class="content-wrapper">
             <div class="text-rich-text w-richtext">
               <h5><strong>PRIVACY POLICY</strong></h5>
-              <p>Last Updated: <a href="#">April 28,2023</a>
-              </p>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then</p>
-              <h5><strong>Summary of Key Points</strong></h5>
-              <h6>What personal information do we process?</h6>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then</p>
+              <p>Last Updated: February 13, 2025</p>
+             
+               <p>Eassave values your privacy. This Privacy Policy explains how we collect, use, and protect your information.</p>
+
+               <h6>1. <strong>Information We Collect</strong></h6>
+               <ul>
+                <li>Name, email, phone number</li>
+                <li>IP address (for security and anti-spam)</li>
+                <li>Payment details (processed via third-party payment gateways)</li>
+                <li>Business card details (customized by users)</li>
+              </ul>
+
+              <h6>2. <strong>How We Collect Data</strong></h6>
+              <ul>
+                <li><strong>Forms:</strong> During account creation and purchases</li>
+                <li><strong>Cookies & Sessions:</strong> To enhance user experience and security</li>
+              </ul>
+
+              <h6>3. <strong>Why We Collect Your Data</strong></h6>
+              <ul>
+                <li>To provide and operate our services</li>
+                <li>For security measures (anti-spam, fraud prevention)</li>
+                <li>To offer customer support</li>
+                <li>To improve user experience</li>
+              </ul>
+
+              <h6>4. <strong>Sharing of Data</strong></h6>
+              <ul>
+                <li>We share data for <strong>payment processing</strong>.</li>
+                <li>We also share data with <strong>social media platforms</strong>, as it is a part of our business model.</li>
+                <li>In the future, we may integrate with third-party services (e.g., analytics, marketing, and business tools) while ensuring user consent.</li>
+              </ul>
+
+              <h6>5. <strong>Data Retention</strong></h6>
+              <ul>
+                <li>Your data is retained <strong>as long as your account is active</strong> or as required by law.</li>
+              </ul>
+
+              <h6>6. <strong>Security Measures</strong></h6>
+              <ul>
+                <li>Encryption for sensitive data</li>
+                <li>Secure servers & firewalls</li>
+                <li>CSRF and SQL injection protection</li>
+                <li>Access control policies</li>
+                <li>Regular security audits</li>
+              </ul>
+
+              <h6>7. <strong>User Rights</strong></h6>
+              <ul>
+                <li>You may <strong>access, update, or delete</strong> your data through your account settings.</li>
+                <li>You may opt out of cookies.</li>
+                <li>You may unsubscribe from marketing emails anytime.</li>
+              </ul>
+
+              <h6>8. <strong>Compliance with Laws</strong></h6>
+              <ul>
+                <li>We comply with applicable <strong>Philippine data protection laws</strong>.</li>
+                <li>If future international laws (e.g., <strong>GDPR, CCPA</strong>) apply, we will update this policy accordingly.</li>
+              </ul>
+
+              <h6>9. <strong>Changes to this Privacy Policy</strong></h6>
+              <ul>
+                <li>We may update this Privacy Policy, and continued use of our services implies acceptance of changes.</li>
+              </ul>
+
+              <p>For inquiries, contact us at <strong><a href="mailto:support@eassave.com">support@eassave.com</a></strong>.</p>
+
+
             </div>
           </div>
         </div>

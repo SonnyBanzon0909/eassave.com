@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 
 
 
- 
+
 
 
 ?>
@@ -53,7 +53,7 @@ if ($conn->connect_error) {
 <body>
   <div class="page-wrapper">
     <div class="main-wrapper">
-      
+
      <!-- Navigation -->
      <?php include 'partials/global-css.css'; ?>
      
@@ -82,12 +82,57 @@ if ($conn->connect_error) {
           <div class="content-wrapper">
             <div class="text-rich-text w-richtext">
               <h5><strong>Terms and Conditions</strong></h5>
-              <p>Last Updated: <a href="#">April 28,2023</a>
-              </p>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then</p>
-              <h5><strong>Summary of Key Points</strong></h5>
-              <h6>What personal information do we process?</h6>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then</p>
+              <p>Last Updated: February 12, 2025</p>
+              
+              
+              <p>Welcome to Eassave! These Terms and Conditions govern your use of our website (eassave.com) and services. By using our services, you agree to comply with these terms.</p>
+
+              <h6>1. <strong>Eligibility</strong></h6>
+              <ul>
+                <li>You must be at least <strong>16 years old</strong> to use our services.</li>
+                <li>By creating an account, you confirm that the information provided is accurate.</li>
+              </ul>
+
+              <h6>2. <strong>Account Registration</strong></h6>
+              <ul>
+                <li>You are required to create an account to use our services.</li>
+                <li>You are responsible for maintaining the confidentiality of your account details.</li>
+              </ul>
+
+              <h6>3. <strong>Payment and Refund Policy</strong></h6>
+              <ul>
+                <li>Full payment is required at checkout.</li>
+                <li>We do <strong>not</strong> offer refunds; however, if a system failure occurs, we provide support.</li>
+              </ul>
+
+              <h6>4. <strong>User-Generated Content</strong></h6>
+              <ul>
+                <li>Users can submit <strong>reviews</strong> about our services.</li>
+                <li>We reserve the right to moderate or remove content that violates our policies.</li>
+              </ul>
+
+              <h6>5. <strong>Usage Restrictions</strong></h6>
+              <ul>
+                <li>Users must not engage in activities that <strong>damage</strong> or <strong>misuse</strong> their digital business card.</li>
+                <li>We do not offer replacements for broken or lost digital business cards.</li>
+              </ul>
+
+              <h6>6. <strong>Support and Warranties</strong></h6>
+              <ul>
+                <li>We provide support for technical issues but do not guarantee uninterrupted service.</li>
+              </ul>
+
+              <h6>7. <strong>Dispute Resolution & Governing Law</strong></h6>
+              <ul>
+                <li>Any disputes shall be governed by the <strong>laws of the Philippines</strong>.</li>
+                <li>Disputes must first go through <strong>private dispute resolution via Eassave's communication channels</strong> before legal action.</li>
+              </ul>
+
+              <h6>8. <strong>Changes to Terms</strong></h6>
+              <ul>
+                <li>We may update these terms, and continued use of our services implies acceptance of the new terms.</li>
+              </ul>
+
             </div>
           </div>
         </div>
