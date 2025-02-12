@@ -51,6 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if honeypot field is filled (spam detection)
     if (!empty($honeypot)) {
+        // Insert into spam table
+        $stmt_spam = $conn->prepare("INSERT INTO spam (name, email, ip_address, is_spam) VALUES (?, ?, ?, ?)");
+        $ip_address = $_SERVER['REMOTE_ADDR']; // Get the IP address
+        $is_spam = 1; // Mark as spam
+        $stmt_spam->bind_param("ssss", $full_name, $email, $ip_address, $is_spam);
+        $stmt_spam->execute();
+        $stmt_spam->close();
+
         echo json_encode(["status" => "error", "message" => "Spam detected."]);
         exit();
     }
@@ -83,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Prepare and bind SQL statement
+    // Prepare and bind SQL statement for valid inquiry
     $stmt = $conn->prepare("INSERT INTO contact_inquiry (full_name, last_name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssss", $full_name, $last_name, $email, $contact, $subject, $message);
 
