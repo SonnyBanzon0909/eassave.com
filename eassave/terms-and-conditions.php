@@ -84,7 +84,7 @@ if ($conn->connect_error) {
               <h5><strong>Terms and Conditions</strong></h5>
               <p>Last Updated: February 12, 2025</p>
               
-              
+
               <p>Welcome to Eassave! These Terms and Conditions govern your use of our website (eassave.com) and services. By using our services, you agree to comply with these terms.</p>
 
               <h6>1. <strong>Eligibility</strong></h6>
@@ -104,7 +104,7 @@ if ($conn->connect_error) {
                 <li>Full payment is required at checkout.</li>
                 <li>We do <strong>not</strong> offer refunds; however, if a system failure occurs, we provide support.</li>
               </ul>
-
+ 
               <h6>4. <strong>User-Generated Content</strong></h6>
               <ul>
                 <li>Users can submit <strong>reviews</strong> about our services.</li>
