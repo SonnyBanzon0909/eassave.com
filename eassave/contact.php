@@ -144,7 +144,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                   <div id="w-node-a88b321f-6bc7-436e-b7d1-059cad689fe7-ae446d1b" class="field-wrapper">
 
                     <!-- Honeypot field (hidden from users) -->
-                    <input type="text" name="honeypot" style="display:none;">
+                    <input type="text" name="honeypot" style="display:block;">
 
                     <!-- reCAPTCHA -->
                     <!-- <div class="g-recaptcha" data-sitekey="6LfW29AqAAAAABIiW2q1R_YcrYCEntW0SaGevIro"></div> -->

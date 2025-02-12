@@ -20,10 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prevent frequent submissions (Rate Limiting)
-    if (isset($_SESSION['last_submission']) && time() - $_SESSION['last_submission'] < 30) {
-        echo json_encode(["status" => "error", "message" => "You are submitting too frequently."]);
-        exit();
-    }
+    // if (isset($_SESSION['last_submission']) && time() - $_SESSION['last_submission'] < 30) {
+    //     echo json_encode(["status" => "error", "message" => "You are submitting too frequently."]);
+    //     exit();
+    // }
 
     // Store the submission time
     $_SESSION['last_submission'] = time();
@@ -37,6 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = htmlspecialchars(trim($_POST["message"]));
     $honeypot = trim($_POST["honeypot"]); // Hidden field for spam bots
 
+    // Check for spam using honeypot field
+    if (!empty($honeypot)) {
+        // If the honeypot field is filled, insert into spam table
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        
+        // Insert into spam table
+        $stmt = $conn->prepare("INSERT INTO spam (name, email, ip_address, is_spam, created_at) VALUES (?, ?, ?, ?, NOW())");
+        $is_spam = 1; // Mark as spam
+        $stmt->bind_param("ssss", $full_name, $email, $ip_address, $is_spam);
+        $stmt->execute();
+        echo json_encode(["status" => "error", "message" => "Spam detected."]);
+        exit();
+    }
+
     // Validate required fields
     if (empty($full_name) || empty($last_name) || empty($email) || empty($contact) || empty($subject)) {
         echo json_encode(["status" => "error", "message" => "Please fill in all required fields."]);
@@ -46,20 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode(["status" => "error", "message" => "Invalid email format."]);
-        exit();
-    }
-
-    // Check if honeypot field is filled (spam detection)
-    if (!empty($honeypot)) {
-        // Insert into spam table
-        $stmt_spam = $conn->prepare("INSERT INTO spam (name, email, ip_address, is_spam) VALUES (?, ?, ?, ?)");
-        $ip_address = $_SERVER['REMOTE_ADDR']; // Get the IP address
-        $is_spam = 1; // Mark as spam
-        $stmt_spam->bind_param("ssss", $full_name, $email, $ip_address, $is_spam);
-        $stmt_spam->execute();
-        $stmt_spam->close();
-
-        echo json_encode(["status" => "error", "message" => "Spam detected."]);
         exit();
     }
 
@@ -91,9 +94,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Prepare and bind SQL statement for valid inquiry
-    $stmt = $conn->prepare("INSERT INTO contact_inquiry (full_name, last_name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $full_name, $last_name, $email, $contact, $subject, $message);
+    // Get the real IP address (considering proxies or load balancers)
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+
+    // Prepare and bind SQL statement for regular contact_inquiry table
+    $stmt = $conn->prepare("INSERT INTO contact_inquiry (full_name, last_name, email, phone, subject, message, ip_address) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $full_name, $last_name, $email, $contact, $subject, $message, $ip_address);
 
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "success"]);
