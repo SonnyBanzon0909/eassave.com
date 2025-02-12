@@ -401,6 +401,7 @@ input[type="number"]::-webkit-outer-spin-button {
   box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
   margin-top: 5px;
   text-align: center;
+  right: 0px;
 }
 
 .nav-dropdown-list a:hover

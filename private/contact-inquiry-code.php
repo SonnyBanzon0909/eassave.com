@@ -106,6 +106,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "success"]);
+
+
+// Store email in session with a unique key
+
+        // Store sanitized input data in session variables with "recipient-" prefix
+        $_SESSION['recipient-full-name'] = $full_name;
+        $_SESSION['recipient-last-name'] = $last_name;
+        $_SESSION['recipient-email'] = $email;
+        $_SESSION['recipient-contact'] = $contact;
+        $_SESSION['recipient-subject'] = $subject;
+        $_SESSION['recipient-message'] = $message;
+
+// Redirect to inquiry-received.php
+        include 'inquiry-received-code.php';
+        
+
     } else {
         echo json_encode(["status" => "error", "message" => "Failed"]);
     }
