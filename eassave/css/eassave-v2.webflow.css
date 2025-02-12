@@ -4264,6 +4264,11 @@ figcaption {
   padding: 38px 60px;
 
   position: relative;
+  display: block;
+ 
+}
+.otp-auth-wrapper
+{
   display: flex;
   align-content: center;
   flex-direction: column;

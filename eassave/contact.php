@@ -109,6 +109,15 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
               <form id="contactForm" name="wf-form-Contac-Form" data-name="Contac Form" method="post" action="../private/contact-inquiry-code.php" data-wf-page-id="665f147b743ba95cae446d1b" data-wf-element-id="550d4482-d834-9b59-78d6-1c07e00f078f">
                 <div class="form-grid">
 
+
+
+                  <div id="w-node-b4115476-a308-154a-3c61-fc00b455bf5d-ae446d1b" class="field-wrapper">
+
+                    <input type="hidden" class="text-field w-input"  name="csrf_token" value="<?php echo $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); ?>">
+                  </div>
+
+
+
                   <div id="w-node-_1c8a4e4f-4725-3718-2185-dbe1f9b8beab-ae446d1b" class="field-wrapper"><label for="name" class="text-size-small label">Full Name <span class="asterisk">*</span></label><input class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="" type="text" id="name" required=""></div>
 
                   <div id="w-node-e875fc1a-e962-46bc-4d19-da469af3ddf1-ae446d1b" class="field-wrapper"><label for="Last-Name" class="text-size-small label">Last Name <span class="asterisk">*</span></label><input class="text-field w-input" maxlength="256" name="Last-Name" data-name="Last Name" placeholder="" type="text" id="Last-Name" required=""></div>
@@ -129,14 +138,28 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                   <div id="w-node-a88b321f-6bc7-436e-b7d1-059cad689fe7-ae446d1b" class="field-wrapper"><label for="name-5" class="text-size-small label">Message</label><textarea placeholder="Example Text" maxlength="5000" id="field" name="message" data-name="Field" class="textarea w-input"></textarea>
 
 
+                  </div>
 
-                    <!-- Google reCAPTCHA -->
-                    <!-- <div class="g-recaptcha" id="g-recaptcha" style="margin-top: 10px;" data-sitekey="6LfW29AqAAAAABIiW2q1R_YcrYCEntW0SaGevIro"></div> -->
+
+                  <div id="w-node-a88b321f-6bc7-436e-b7d1-059cad689fe7-ae446d1b" class="field-wrapper">
+
+                    <!-- Honeypot field (hidden from users) -->
+                    <input type="text" name="honeypot" style="display:none;">
+
+                    <!-- reCAPTCHA -->
+                    <!-- <div class="g-recaptcha" data-sitekey="6LfW29AqAAAAABIiW2q1R_YcrYCEntW0SaGevIro"></div> -->
+
+
+                    <!-- reCAPTCHA TESTING-->
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+
+
 
                   </div>
 
 
 
+                  
 
                   <button type="submit" id="w-node-_643debe4-a7f8-7f74-d834-7f839ce16efc-ae446d1b" data-w-id="643debe4-a7f8-7f74-d834-7f839ce16efc"   class="button is-icon max-button-width w-inline-block">
                     <div class="btn-text">Send Message</div>
@@ -282,34 +305,40 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 <script type="text/javascript">
 
- 
- 
- 
 
-  document.getElementById("contactForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
 
-  // Create a FormData object to gather the form data
-  const formData = new FormData(this);
 
-  // Make the fetch request
-  const response = await fetch("../private/contact-inquiry-code.php", {
-    method: "POST",  // Make sure it's POST, not GET
-    body: formData
+
+  document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Create a FormData object to gather the form data
+    const formData = new FormData(this);
+
+    // Make the fetch request
+    const response = await fetch("../private/contact-inquiry-code.php", {
+        method: "POST", // Make sure it's POST, not GET
+        body: formData
+      });
+
+    // Wait for the response to be parsed as JSON
+    const result = await response.json();
+
+    // Check for success
+    if (result.message === "success") {
+        // Reset the form
+      this.reset();  
+
+        // Redirect to Thank You page after resetting
+      window.location.href = "thank-you.php";
+    } else {
+        // Show any error message
+      // Reset the form
+      this.reset();  
+      alert(result.message);
+    }
   });
 
-  // Wait for the response to be parsed as JSON
-  const result = await response.json();
-
-  // Check for success
-  if (result.message === "success") {
-    // Redirect to OTP page on successful login
-    window.location.href = "thank-you.php";
-  } else {
-    // Show any error message
-    alert(result.message);
-  }
-});
 
 
   // var onloadCallback = function() {

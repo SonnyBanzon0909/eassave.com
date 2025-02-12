@@ -10,9 +10,24 @@ $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 if ($conn->connect_error) {
     die(json_encode(["status" => "error", "message" => "Database connection failed."]));
 }
- 
+
 // Process only POST requests
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // CSRF Protection
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        echo json_encode(["status" => "error", "message" => "Invalid CSRF token."]);
+        exit();
+    }
+
+    // Prevent frequent submissions (Rate Limiting)
+    if (isset($_SESSION['last_submission']) && time() - $_SESSION['last_submission'] < 30) {
+        echo json_encode(["status" => "error", "message" => "You are submitting too frequently."]);
+        exit();
+    }
+
+    // Store the submission time
+    $_SESSION['last_submission'] = time();
+
     // Sanitize input data
     $full_name = htmlspecialchars(trim($_POST["name"]));
     $last_name = htmlspecialchars(trim($_POST["Last-Name"]));
@@ -20,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact = htmlspecialchars(trim($_POST["Contact"]));
     $subject = htmlspecialchars(trim($_POST["Subject"]));
     $message = htmlspecialchars(trim($_POST["message"]));
+    $honeypot = trim($_POST["honeypot"]); // Hidden field for spam bots
 
     // Validate required fields
     if (empty($full_name) || empty($last_name) || empty($email) || empty($contact) || empty($subject)) {
@@ -33,6 +49,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    // Check if honeypot field is filled (spam detection)
+    if (!empty($honeypot)) {
+        echo json_encode(["status" => "error", "message" => "Spam detected."]);
+        exit();
+    }
+
+    // Check for spam using reCAPTCHA (optional, but recommended)
+    $recaptcha_secret = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"; // Replace with your reCAPTCHA secret key
+    $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
+
+    $recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+    $recaptcha_data = [
+        'secret'   => $recaptcha_secret,
+        'response' => $recaptcha_response,
+        'remoteip' => $_SERVER['REMOTE_ADDR']
+    ];
+    
+    $recaptcha_options = [
+        'http' => [
+            'method'  => 'POST',
+            'header'  => 'Content-Type: application/x-www-form-urlencoded',
+            'content' => http_build_query($recaptcha_data)
+        ]
+    ];
+    
+    $recaptcha_context  = stream_context_create($recaptcha_options);
+    $recaptcha_verify   = file_get_contents($recaptcha_url, false, $recaptcha_context);
+    $recaptcha_response_data = json_decode($recaptcha_verify);
+
+    if (!$recaptcha_response_data->success) {
+        echo json_encode(["status" => "error", "message" => "reCAPTCHA verification failed."]);
+        exit();
+    }
+
     // Prepare and bind SQL statement
     $stmt = $conn->prepare("INSERT INTO contact_inquiry (full_name, last_name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssss", $full_name, $last_name, $email, $contact, $subject, $message);
@@ -40,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "success"]);
     } else {
-        echo json_encode(["status" => "error", "message" => "failed"]);
+        echo json_encode(["status" => "error", "message" => "Failed"]);
     }
 
     $stmt->close();

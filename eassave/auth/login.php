@@ -185,33 +185,33 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
-  document.addEventListener("DOMContentLoaded", async function () {
-    try {
-        // Create a FormData object (if needed)
-        let formData = new FormData(); // Only if you need to send form data
+  // document.addEventListener("DOMContentLoaded", async function () {
+  //   try {
+  //       // Create a FormData object (if needed)
+  //       let formData = new FormData(); // Only if you need to send form data
 
-        // Make the fetch request
-        const response = await fetch("../private/auth/otp-verify-code.php", {
-            method: "POST", // Ensure it's a POST request
-            body: formData
-          });
+  //       // Make the fetch request
+  //       const response = await fetch("../private/auth/otp-verify-code.php", {
+  //           method: "POST", // Ensure it's a POST request
+  //           body: formData
+  //         });
 
-        // Wait for the response to be parsed as JSON
-        const result = await response.json();
+  //       // Wait for the response to be parsed as JSON
+  //       const result = await response.json();
 
-        // Check for success
-        if (result.message === "success") {
-          alert("SUCCESS!!!!");
-        } else {
-            // Show any error message
-          alert("OTP verification failed!");
+  //       // Check for success
+  //       if (result.message === "success") {
+  //         alert("SUCCESS!!!!");
+  //       } else {
+  //           // Show any error message
+  //         alert("OTP verification failed!");
 
-          alert(result.message);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    });
+  //         alert(result.message);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   });
 
 
 

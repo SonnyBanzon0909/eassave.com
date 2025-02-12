@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Check if the user exists in the database
-    $stmt = $conn->prepare("SELECT id, password_hash FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, password_hash FROM users WHERE email = ? and is_active = 1");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
