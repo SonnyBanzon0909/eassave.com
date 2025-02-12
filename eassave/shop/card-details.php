@@ -109,8 +109,8 @@ $stmt->close();
           <div class="details-wrapper">
             <div class="shop-bread-crumbs-wrappr">
               <div class="bread-crumbs-container">
-                <a href="#" class="breadcrumbs">Home</a><img src="images/bi_chevron-down.svg" loading="lazy" alt="">
-                <a href="../shop.html" class="breadcrumbs">Shop</a><img src="images/bi_chevron-down.svg" loading="lazy" alt="">
+                <a href="index.php" class="breadcrumbs">Home</a><img src="images/bi_chevron-down.svg" loading="lazy" alt="">
+                <a href="shop.php" class="breadcrumbs">Shop</a><img src="images/bi_chevron-down.svg" loading="lazy" alt="">
 
 
                 <!-- ----------------- -->
@@ -128,7 +128,7 @@ $stmt->close();
                   while ($row = $result->fetch_assoc()) {
 
 
-                    echo '<a href="../shop.html" class="breadcrumbs">'. htmlspecialchars($row['name']). '</a>';
+                    echo '<a href="#" class="breadcrumbs">'. htmlspecialchars($row['name']). '</a>';
                   }
                 }
                 else 
