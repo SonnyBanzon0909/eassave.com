@@ -327,6 +327,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
     // Check for success
     if (result.message === "success") {
         // Reset the form
+
+      alert(result.message);
       this.reset();  
 
         // Redirect to Thank You page after resetting
