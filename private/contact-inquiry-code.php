@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Redirect to inquiry-received.php
         include 'inquiry-received-code.php';
         
-
+ 
     } else {
         echo json_encode(["status" => "error", "message" => "Failed"]);
     }
