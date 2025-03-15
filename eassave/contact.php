@@ -332,7 +332,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       this.reset();  
 
         // Redirect to Thank You page after resetting
-      window.location.href = "thank-you.php";
+      /////////////////////////////////////////////window.location.href = "thank-you.php";
     } else {
         // Show any error message
       // Reset the form

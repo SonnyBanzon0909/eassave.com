@@ -29,7 +29,7 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'noreply.eassave@gmail.com';  // Your Gmail username
-    $mail->Password = 'lcgrqmtqkxjilysq';  // Use App Password
+    $mail->Password = 'bdmsenjahuwpixfr';//lcgrqmtqkxjilysq';  // Use App Password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
     $mail->SMTPDebug = 0;
