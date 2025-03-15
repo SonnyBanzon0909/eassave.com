@@ -57,7 +57,7 @@ try {
     );
 
     // Email Recipients
-    $mail->setFrom("noreply.eassave@gmail.com", 'Eassave');
+    $mail->setFrom("noreply.eassave@gmail.com", 'Eassave | Your Smart Digital Card');
     $mail->addAddress($email);
     $mail->addReplyTo('noreply.eassave@gmail.com');
 
