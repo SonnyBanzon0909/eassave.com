@@ -44,20 +44,44 @@ try {
     );
 
     // Email Recipients
-    $mail->setFrom("noreply.eassave@gmail.com", 'Eassave');
+    $mail->setFrom("noreply.eassave@gmail.com", 'Eassave | Your Smart Digital Card');
     $mail->addAddress($email);
     $mail->addReplyTo('noreply.eassave@gmail.com');
+
+    // Load email signature from file
+    $email_signature = file_get_contents('../email-signature.html');
 
     // Email Content
     $mail->isHTML(true);
     $mail->Subject = 'Your One-Time Password (OTP) - Eassave';
     $mail->Body = "
-        Dear User,<br><br>
-        Your OTP is: <strong>$otp</strong><br><br>
-        This OTP is valid for 5 minutes.<br><br>
-        Best regards,<br>
-        Eassave & Protech Innovation Group
+    <div style='width: 100%; text-align: center;'>
+    <table width='800' border='0' cellspacing='0' cellpadding='0' align='center' style='
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    '>
+    <tr>
+    <td style='text-align: left;'>
+    <p>Dear User,</p>
+    <p>Your OTP is: <strong>$otp</strong></p>
+    <p>This OTP is valid for 5 minutes.</p>
+    <p>Best regards,<br>Eassave & Protech Innovation Group</p>
+
+    <br>
+    <br>
+    
+    </td>
+    </tr>
+
+    $email_signature
+
+    </table>
+    </div>
     ";
+
     $mail->AltBody = "Your OTP is: $otp. This OTP is valid for 5 minutes.";
 
     // Send Email
