@@ -20,6 +20,9 @@ if (!isset($_SESSION['recipient-full-name']) ||
     exit;
 }
 
+
+
+
 // Get session values
 $full_name = $_SESSION['recipient-full-name'];
 $last_name = $_SESSION['recipient-last-name'];
