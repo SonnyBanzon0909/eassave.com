@@ -62,14 +62,51 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
        <!-- Global CSS -->
        <?php include 'partials/global-css.css'; ?>
-     </div>
+       <style>
+        .spinner {
+          width: 40px;
+          height: 40px;
+          border: 4px solid #ddd;
+          border-top: 4px solid #007bff;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+        #loading
+        {
+
+          height: 100vh;
+          width: 100%;
+          align-content: center;
+          justify-content: center;
+          position: fixed;
+          z-index: 110;
+          align-items: center;
+          background-color: #0000005e;
+
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+      </style>
+    </div>
 
 
-     <!-- Navigation -->
-     <?php include 'partials/navigation-dark.html'; ?>
+    <!-- Navigation -->
+    <?php include 'partials/navigation-dark.html'; ?>
 
 
-     <section class="section-header">
+    <div id="loading" style="display: none;">
+      <!-- <h3 class="header-text opacity-3">Processing your inquiry...</h1> -->
+      <div class="spinner"></div> <!-- Add a CSS spinner -->
+    </div>
+
+
+
+
+    <section class="section-header">
       <div class="padding-global">
         <div class="container-large">
           <div class="header-moving-wrapper absolute-header">
@@ -312,34 +349,43 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   document.getElementById("contactForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    // Show the loader
+    document.getElementById("loading").style.display = "flex";
+
     // Create a FormData object to gather the form data
     const formData = new FormData(this);
 
-    // Make the fetch request
-    const response = await fetch("../private/contact-inquiry-code.php", {
-        method: "POST", // Make sure it's POST, not GET
-        body: formData
-      });
+    try {
+        // Make the fetch request
+      const response = await fetch("../private/contact-inquiry-code.php", {
+            method: "POST", // Make sure it's POST, not GET
+            body: formData
+          });
 
-    // Wait for the response to be parsed as JSON
-    const result = await response.json();
+        // Wait for the response to be parsed as JSON
+      const result = await response.json();
 
-    // Check for success
-    if (result.message === "success") {
-        // Reset the form
+        // Hide the loader
+      document.getElementById("loading").style.display = "none";
 
-      alert(result.message);
-      this.reset();  
+        // Check for success
+      if (result.message === "success") {
+        //alert(result.message);
+        this.reset();  
 
-        // Redirect to Thank You page after resetting
-      /////////////////////////////////////////////window.location.href = "thank-you.php";
-    } else {
-        // Show any error message
-      // Reset the form
-      this.reset();  
-      alert(result.message);
+            // Redirect to Thank You page after resetting
+        window.location.href = "thank-you.php";
+      } else {
+        ///alert(result.message);
+        this.reset();  
+      }
+    } catch (error) {
+        // Hide the loader in case of an error
+      document.getElementById("loading").style.display = "none";
+      alert("An error occurred. Please try again.");
     }
   });
+
 
 
 
