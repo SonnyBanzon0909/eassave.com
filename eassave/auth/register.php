@@ -306,12 +306,12 @@ document.getElementById("otp-form").addEventListener("submit", function (event) 
     .then(response => response.json())
     .then(data => {
         if (data.message === "success") {
-            alert("OTP Verified! Redirecting...");
+            ///alert("OTP Verified! Redirecting...");
             window.location.href = "index.php"; // Change to your desired page
         } else {
             alert("Invalid OTP. Please try again.");
         }
-        alert(data.message);
+        //alert(data.message);
     })
     .catch(error => console.error("Error:", error));
 });

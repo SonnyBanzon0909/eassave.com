@@ -28,6 +28,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 }
 
 
+
 ?>
 
 
@@ -58,6 +59,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
        <!-- Global CSS -->
        <?php include 'partials/global-css.css'; ?>
+
      </div>
 
 
@@ -91,7 +93,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
               </div>
 
               <div class="success-title">Message sent.</div>
-              <div class="big-body-text success-excerpt">We’ll review your inquiry and get back to you as soon as we can.</div><a href="https://www.bayaninnovationgroup.org/" class="close-success w-inline-block">
+              <div class="big-body-text success-excerpt">We’ll review your inquiry and get back to you as soon as we can.</div><a href="index.php" class="close-success w-inline-block">
                 <img src="images/close.svg" loading="lazy" alt="" class="close-icon">
               </a>
 
