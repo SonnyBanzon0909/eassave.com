@@ -311,7 +311,7 @@ document.getElementById("otp-form").addEventListener("submit", function (event) 
         } else {
             alert("Invalid OTP. Please try again.");
         }
-        //alert(data.message);
+        alert(data.message,"ADD success popup here");
     })
     .catch(error => console.error("Error:", error));
 });
