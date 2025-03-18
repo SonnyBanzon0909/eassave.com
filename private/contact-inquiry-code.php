@@ -117,9 +117,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['recipient-contact'] = $contact;
         $_SESSION['recipient-subject'] = $subject;
         $_SESSION['recipient-message'] = $message;
+        $_SESSION['submitted'] = true;
+
 
 // Redirect to inquiry-received.php
-        include 'inquiry-received-code.php';
+        //////////// include 'inquiry-received-code.php';
          
 
  

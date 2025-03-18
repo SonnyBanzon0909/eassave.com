@@ -65,7 +65,7 @@ try {
     $mail->addReplyTo('noreply.eassave@gmail.com');
 
     // Load email signature from file
-    $email_signature = file_get_contents('email-signature.html');
+    $email_signature = file_get_contents('../private/email-signature.html');
 
     // Email Content
     $mail->isHTML(true);
@@ -129,11 +129,12 @@ try {
     // Clear any output and send a success response
     ob_end_clean();
     /////////echo json_encode(["message" => "success"]);
-    exit;
+    //////////exit;
 
 } catch (Exception $e) {
     // Clear any output and send an error response
     ob_end_clean();
+    echo "<script>alert('Session value: " . $e . "');</script>";
     // ////echo json_encode(["message" => "error", "error" => $mail->ErrorInfo]);
     exit;
 }
