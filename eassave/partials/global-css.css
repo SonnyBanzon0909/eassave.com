@@ -510,8 +510,8 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Alternative using :has() (works in modern browsers) */
 .radio-btn-wrapper:has(input[type="radio"]:checked) {
   border: 1px solid black !important;
-  
-  
+
+
 }
 
 .spinner {
@@ -542,6 +542,25 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+
+/*Hide arrow when no Slides*/
+.swiper-button-disabled
+{
+ opacity: 0 !important;
+}
+.swiper-wrapper{
+  -webkit-transition-timing-function:linear!important;    transition-timing-function:linear!important; 
+  position: relative;
+}
+.testi-slide.swiper-slide {
+  height: auto;
+}
+.flex-swiper
+{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
 
 @media screen and (max-width: 479px) {
   #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d, #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d4f {

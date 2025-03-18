@@ -237,8 +237,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       <div class="padding-global">
         <div class="container-large">
           <div class="heading-style-h6 text-align-center">Teams at these industry-leading companies love using our digital business cards</div>
-          <div class="partners-list-wrapper">
-            <div class="partners-list owl-carousel owl-theme">
+          <div class="swiper-container partner-slider">
+            <div class="swiper-wrapper flex-swiper">
 
               <!-- -------------- -->
 
@@ -249,7 +249,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
               if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                  echo '<div class="partners-item">';
+                  echo '<div class="swiper-slide partners-item">';
                   echo '  <img src="' . htmlspecialchars($row['logo']) . '" loading="eager" alt="' . htmlspecialchars($row['name']) . '" class="partners-img">';
                   echo '</div>';
                 }
@@ -559,6 +559,22 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
  }          
 });
 
+
+// Partners Slider - Swiper
+
+
+let swiper1 = new Swiper('.partner-slider', {
+  spaceBetween: 100,
+  centeredSlides: true,
+  speed: 6000,
+  autoplay: {
+    delay: 1,
+  },
+  loop: true,
+  slidesPerView: 'auto',
+  allowTouchMove: false,
+  disableOnInteraction: true
+});
 
 
 </script>
