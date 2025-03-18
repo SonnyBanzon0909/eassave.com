@@ -575,7 +575,7 @@ let swiper1 = new Swiper('.partner-slider', {
   allowTouchMove: false,
   disableOnInteraction: true
 });
-
+ 
 
 </script>
 
