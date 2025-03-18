@@ -31,7 +31,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 if ($_SESSION['submitted'] == true) {
     // Set the session to false after submission
   $_SESSION['submitted'] = false;
-  
+
     // Add a JavaScript call to trigger the AJAX request
   echo "<script>
   fetch('../private/inquiry-received-code.php', {
@@ -43,6 +43,11 @@ if ($_SESSION['submitted'] == true) {
       })
       .catch(error => console.error('Error:', error));
       </script>";
+    }
+    else
+    {
+      header("Location: .../../index.php");
+      exit();
     }
 
 
