@@ -62,35 +62,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
        <!-- Global CSS -->
        <?php include 'partials/global-css.css'; ?>
-       <style>
-        .spinner {
-          width: 40px;
-          height: 40px;
-          border: 4px solid #ddd;
-          border-top: 4px solid #007bff;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-        #loading
-        {
 
-          height: 100vh;
-          width: 100%;
-          align-content: center;
-          justify-content: center;
-          position: fixed;
-          z-index: 110;
-          align-items: center;
-          background-color: #0000005e;
-
-        }
-
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-      </style>
     </div>
 
 
@@ -164,7 +136,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                     <div id="w-node-c617a128-0084-2b8b-d735-09b77103aa40-ae446d1b" class="field-wrapper"><label for="Contact" class="text-size-small label">Contact Number <span class="asterisk">*</span></label><input class="text-field w-input" maxlength="256" name="Contact" data-name="Contact" placeholder="" type="text" id="Contact" required=""></div>
 
                     <div id="w-node-_647ce693-6ecb-153e-813b-ca392abb3e1b-ae446d1b" class="field-wrapper"><label for="name-5" class="text-size-small label">Subject <span class="asterisk">*</span></label>
-                      <div class="select-wrapper"><select id="Subject" name="Subject" data-name="Subject" class="select w-select">
+                      <div class="select-wrapper"><select id="Subject" required="" name="Subject" data-name="Subject" class="select w-select">
                         <option value="">Inquiry</option>
                         <option value="First">First choice</option>
                         <option value="Second">Second choice</option>
@@ -172,7 +144,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
                       </select><img src="images/select-arrow.svg" loading="lazy" alt="" class="select-icon"></div>
                     </div>
 
-                    <div id="w-node-a88b321f-6bc7-436e-b7d1-059cad689fe7-ae446d1b" class="field-wrapper"><label for="name-5" class="text-size-small label">Message</label><textarea placeholder="Example Text" maxlength="5000" id="field" name="message" data-name="Field" class="textarea w-input"></textarea>
+                    <div id="w-node-a88b321f-6bc7-436e-b7d1-059cad689fe7-ae446d1b" class="field-wrapper"><label for="name-5" class="text-size-small label">Message<span class="asterisk">*</span></label><textarea placeholder="Example Text" required="" maxlength="5000" id="field" name="message" data-name="Field" class="textarea w-input"></textarea>
 
 
                     </div>
@@ -196,7 +168,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 
-                    
+
 
                     <button type="submit" id="w-node-_643debe4-a7f8-7f74-d834-7f839ce16efc-ae446d1b" data-w-id="643debe4-a7f8-7f74-d834-7f839ce16efc"   class="button is-icon max-button-width w-inline-block">
                       <div class="btn-text">Send Message</div>

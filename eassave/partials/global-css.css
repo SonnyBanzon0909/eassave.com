@@ -509,15 +509,43 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* Alternative using :has() (works in modern browsers) */
 .radio-btn-wrapper:has(input[type="radio"]:checked) {
-    border: 1px solid black !important;
-     
-     
+  border: 1px solid black !important;
+  
+  
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+#loading
+{
+
+  height: 100vh;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 110;
+  align-items: center;
+  background-color: #0000005e;
+
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 
+
 @media screen and (max-width: 479px) {
-    #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d, #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d4f {
-        grid-area: span 1 / span 1 / span 1 / span 1;
-    }
+  #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d3d, #w-node-_57ab25cb-5387-6917-cce6-4d6a7f2c6322-ae446d4f {
+    grid-area: span 1 / span 1 / span 1 / span 1;
+  }
 }
 </style>

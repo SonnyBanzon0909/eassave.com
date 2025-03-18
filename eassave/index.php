@@ -33,7 +33,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 
 ?>
- 
+
 
 
 
@@ -59,6 +59,10 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
 </head>
 <body>
   <div class="page-wrapper">
@@ -140,10 +144,10 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       <div class="padding-global">
         <div class="container-large">
           <div class="why-us-wrapper">
-            <h2 class="heading-style-h1">Why us? Here’s why…</h2>
+            <h2 class="heading-style-h1" data-aos="fade-up"  data-aos-duration="500" >Why us? Here’s why…</h2>
             
 
-            <div class="why-lis-wrapper">
+            <div class="why-lis-wrapper" data-aos="fade-up"  data-aos-duration="600">
               <div class="why-list owl-carousel owl-theme">
 
 
@@ -192,8 +196,8 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
         <div class="padding-global">
           <div class="container-large">
             <div class="smart-block-title-wrapper">
-              <h2 class="heading-style-h1">Smart Connections with one tap.</h2>
-              <a data-w-id="f8ae75de-e514-0ab7-9a1e-704a64c28c25" href="shop.php" class="button is-icon w-inline-block">
+              <h2 class="heading-style-h1" data-aos="fade-up"  data-aos-duration="500">Smart Connections with one tap.</h2>
+              <a data-aos="fade-up"  data-aos-duration="600" data-w-id="f8ae75de-e514-0ab7-9a1e-704a64c28c25" href="shop.php" class="button is-icon w-inline-block">
                 <div class="btn-text">Explore our shop</div>
                 <div class="icon-1x1-small w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewbox="0 0 12 12" fill="none">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M5.32481 1.89973C5.86086 2.62911 7.23527 3.75138 9.13918 3.69086L1.16196 8.29651L1.44768 8.79138L9.42395 4.18628C8.42036 5.80457 8.70502 7.5554 9.06858 8.38414L9.59187 8.15458C9.19323 7.24586 8.893 4.99296 10.9407 3.33777L10.7588 3.11272L10.7351 3.07171L10.6311 2.80164C8.17386 3.74738 6.37291 2.36093 5.78526 1.56133L5.32481 1.89973Z" fill="white"></path>
@@ -276,57 +280,57 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
             <div class="testimonial-list owl-carousel owl-theme">
 
 
-<!-- ------------- -->
+              <!-- ------------- -->
 
-<?php
+              <?php
 // Select query for reviews table
-$select_query = "SELECT id, rating, name, position, image, content, created_at, updated_at FROM reviews ORDER BY id ASC";
-$result = $conn->query($select_query);
+              $select_query = "SELECT id, rating, name, position, image, content, created_at, updated_at FROM reviews ORDER BY id ASC";
+              $result = $conn->query($select_query);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+              if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
         // Determine how many stars to display based on the rating
-        $stars = '';
-        for ($i = 1; $i <= 5; $i++) {
-            if ($i <= $row['rating']) {
-                $stars .= '<img src="images/star.svg" loading="eager" alt="star" class="star">';
-            }  
-        }
+                  $stars = '';
+                  for ($i = 1; $i <= 5; $i++) {
+                    if ($i <= $row['rating']) {
+                      $stars .= '<img src="images/star.svg" loading="eager" alt="star" class="star">';
+                    }  
+                  }
 
-        echo '<div class="testimonial-item">';
-        echo '  <div class="border-gradient pointer-events-off"></div>';
-        echo '  <div class="testimonial-content-con">';
-        
+                  echo '<div class="testimonial-item">';
+                  echo '  <div class="border-gradient pointer-events-off"></div>';
+                  echo '  <div class="testimonial-content-con">';
+
         // Display stars based on rating
-        echo '    <div class="star-wrapper">' . $stars . '</div>';
-        
+                  echo '    <div class="star-wrapper">' . $stars . '</div>';
+
         // Display review content
-        echo '    <p>' . htmlspecialchars($row['content']) . '</p>';
-        
+                  echo '    <p>' . htmlspecialchars($row['content']) . '</p>';
+
         // Display profile
-        echo '    <div class="profile-wrapper">';
-        echo '      <img src="' . htmlspecialchars($row['image']) . '" loading="eager" alt="profile image" class="profile">';
-        echo '      <div class="profile-detail-wrapper">';
-        echo '        <div class="name">' . htmlspecialchars($row['name']) . '</div>';
-        echo '        <div class="position">' . htmlspecialchars($row['position']) . '</div>';
-        echo '      </div>';
-        echo '    </div>';
-        echo '  </div>';
-        echo '</div>';
-    }
-} else {
-    echo "No reviews found.";
-}
+                  echo '    <div class="profile-wrapper">';
+                  echo '      <img src="' . htmlspecialchars($row['image']) . '" loading="eager" alt="profile image" class="profile">';
+                  echo '      <div class="profile-detail-wrapper">';
+                  echo '        <div class="name">' . htmlspecialchars($row['name']) . '</div>';
+                  echo '        <div class="position">' . htmlspecialchars($row['position']) . '</div>';
+                  echo '      </div>';
+                  echo '    </div>';
+                  echo '  </div>';
+                  echo '</div>';
+                }
+              } else {
+                echo "No reviews found.";
+              }
 
 
-?>
+              ?>
 
 
 
-<!-- ------------- -->
+              <!-- ------------- -->
 
 
-  
+
 
 
             </div>
@@ -558,6 +562,20 @@ if ($result->num_rows > 0) {
 
 
 </script>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+   AOS.init({
+    once: true, // Run animations only once globally
+  });
+ });
+</script>
+
+
+
 </body>
 </html>
 

@@ -81,18 +81,23 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
       <!-- Navigation -->
       <?php include '../partials/navigation-dark.html'; ?>
 
-      <!-- OTP wrapper -->
+
+      <!-- Loader wrapper -->
+      <div id="loading" style="display: none;">
+        <!-- <h3 class="header-text opacity-3">Processing your inquiry...</h1> -->
+          <div class="spinner"></div> <!-- Add a CSS spinner -->
+        </div>
+
+
+        <!-- OTP wrapper -->
+        <div class="otp-section-wrapper">
 
 
 
-      <div class="otp-section-wrapper">
 
 
 
-
-
-
-        <div id="w-node-_6781a2ad-69e0-0135-a3da-b0405a444611-e3a519d0" class="auth-form-block w-form otp-auth-wrapper">
+          <div id="w-node-_6781a2ad-69e0-0135-a3da-b0405a444611-e3a519d0" class="auth-form-block w-form otp-auth-wrapper">
 
 
 <!--           <div id="notif-popup" class="popup-wrapper">
@@ -166,7 +171,7 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
                 </div>
                 <div class="field-wrapper">
-                  <input class="text-field transparent-text-field w-input phone-field" maxlength="256" name="phone" id="Phone" placeholder="Phone" type="tel" required>
+                  <input class="text-field transparent-text-field w-input phone-field" maxlength="256" minlength="10" name="phone" id="Phone" placeholder="Phone" type="tel" required>
 
 
 
@@ -294,27 +299,27 @@ if (!isset($_SESSION['is_login']) || $_SESSION['is_login'] !== true) {
 
 //OTP Verification
 
-document.getElementById("otp-form").addEventListener("submit", function (event) {
+  document.getElementById("otp-form").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent default form submission
 
     let formData = new FormData(this);
 
     fetch(this.action, {
-        method: "POST",
-        body: formData
+      method: "POST",
+      body: formData
     })
     .then(response => response.json())
     .then(data => {
-        if (data.message === "success") {
+      if (data.message === "success") {
             ///alert("OTP Verified! Redirecting...");
             window.location.href = "index.php"; // Change to your desired page
-        } else {
+          } else {
             alert("Invalid OTP. Please try again.");
-        }
-        alert(data.message,"ADD success popup here");
-    })
+          }
+          alert(data.message,"ADD success popup here");
+        })
     .catch(error => console.error("Error:", error));
-});
+  });
 
 
 
@@ -322,6 +327,9 @@ document.getElementById("otp-form").addEventListener("submit", function (event) 
 
   document.getElementById("wf-form-Login-Form").addEventListener("submit", async function(e) {
     e.preventDefault();
+
+// Show the loader
+    document.getElementById("loading").style.display = "flex";
 
     const formData = new FormData(this);
 
@@ -347,10 +355,18 @@ document.getElementById("otp-form").addEventListener("submit", function (event) 
   // Control visibility based on result status
     if (result.message === "success") {
 
+
+
+
+// Hide the loader
+      document.getElementById("loading").style.display = "none";
+
       $(".otp-section-wrapper").css("display", "flex");
+
+      this.reset();  
       document.querySelector("form").reset();
 
- 
+
 
 
 
